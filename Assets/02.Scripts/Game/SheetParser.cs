@@ -122,11 +122,11 @@ public class SheetParser : MonoBehaviour
 
                         if (_NoteBody == Enums_Game.NoteBody.HandLeft)
                         {
-                            // ø‹∞¢ IN
+                            // Ïô∏Í∞Å IN
                             //note.img.sprite = note.objectColor[0];
                             //note.markImg.sprite = note.outlineColor[0];
 
-                            // ø‹∞¢ OUT
+                            // Ïô∏Í∞Å OUT
                             note.outerImg.sprite = note.outlineColor[0];
                             note.markImg.sprite = note.objectColor[0];
                             //note.innerImg.sprite = note.objectInnerColor[0];
@@ -135,11 +135,11 @@ public class SheetParser : MonoBehaviour
                         }
                         else if (_NoteBody == Enums_Game.NoteBody.HandRight)
                         {
-                            // ø‹∞¢ IN
+                            // Ïô∏Í∞Å IN
                             //note.img.sprite = note.objectColor[1];
                             //note.markImg.sprite = note.outlineColor[1];
 
-                            // ø‹∞¢ OUT
+                            // Ïô∏Í∞Å OUT
                             note.outerImg.sprite = note.outlineColor[1];
                             note.markImg.sprite = note.objectColor[1];
                             //note.innerImg.sprite = note.objectInnerColor[1];
@@ -188,11 +188,11 @@ public class SheetParser : MonoBehaviour
 
                     //    if (_NoteBody == Enums_Game.NoteBody.HandLeft)
                     //    {
-                    //        // ø‹∞¢ IN
+                    //        // Ïô∏Í∞Å IN
                     //        //note.img.sprite = note.objectColor[0];
                     //        //note.markImg.sprite = note.outlineColor[0];
 
-                    //        // ø‹∞¢ OUT
+                    //        // Ïô∏Í∞Å OUT
                     //        longNote.img.sprite = longNote.outlineColor[0];
                     //        longNote.markImg.sprite = longNote.objectColor[0];
                     //        longNote.innerImg.sprite = longNote.objectInnerColor[0];
@@ -201,11 +201,11 @@ public class SheetParser : MonoBehaviour
                     //    }
                     //    else if (_NoteBody == Enums_Game.NoteBody.HandRight)
                     //    {
-                    //        // ø‹∞¢ IN
+                    //        // Ïô∏Í∞Å IN
                     //        //note.img.sprite = note.objectColor[1];
                     //        //note.markImg.sprite = note.outlineColor[1];
 
-                    //        // ø‹∞¢ OUT
+                    //        // Ïô∏Í∞Å OUT
                     //        longNote.img.sprite = longNote.outlineColor[1];
                     //        longNote.markImg.sprite = longNote.objectColor[1];
                     //        longNote.innerImg.sprite = longNote.objectInnerColor[1];
@@ -248,11 +248,11 @@ public class SheetParser : MonoBehaviour
 
                         if (_NoteBody == Enums_Game.NoteBody.HandLeft)
                         {
-                            // ø‹∞¢ IN
+                            // Ïô∏Í∞Å IN
                             //note.img.sprite = note.objectColor[0];
                             //note.markImg.sprite = note.outlineColor[0];
 
-                            // ø‹∞¢ OUT
+                            // Ïô∏Í∞Å OUT
                             pressNote.outerImg.sprite = pressNote.outlineColor[0];
                             pressNote.markImg.sprite = pressNote.objectColor[0];
                             pressNote.innerImg.sprite = pressNote.objectInnerColor[0];
@@ -261,11 +261,11 @@ public class SheetParser : MonoBehaviour
                         }
                         else if (_NoteBody == Enums_Game.NoteBody.HandRight)
                         {
-                            // ø‹∞¢ IN
+                            // Ïô∏Í∞Å IN
                             //note.img.sprite = note.objectColor[1];
                             //note.markImg.sprite = note.outlineColor[1];
 
-                            // ø‹∞¢ OUT
+                            // Ïô∏Í∞Å OUT
                             pressNote.outerImg.sprite = pressNote.outlineColor[1];
                             pressNote.markImg.sprite = pressNote.objectColor[1];
                             pressNote.innerImg.sprite = pressNote.objectInnerColor[1];
@@ -276,7 +276,7 @@ public class SheetParser : MonoBehaviour
                         sheet.SetNote(_NoteBody, obj);
                     }
 
-                    // ------------------------------------------------------------------------- ±∏ ≥Î∆Æ -------------------------------------------------------------------------
+                    // ------------------------------------------------------------------------- Íµ¨ ÎÖ∏Ìä∏ -------------------------------------------------------------------------
 
                     //if (textSplit.Length.Equals(7))
                     //{
@@ -310,11 +310,11 @@ public class SheetParser : MonoBehaviour
 
                     //        if (_NoteBody == Enums_Game.NoteBody.LeftHand)
                     //        {
-                    //            // ø‹∞¢ IN
+                    //            // Ïô∏Í∞Å IN
                     //            //note.img.sprite = note.objectColor[0];
                     //            //note.markImg.sprite = note.outlineColor[0];
 
-                    //            // ø‹∞¢ OUT
+                    //            // Ïô∏Í∞Å OUT
                     //            note.img.sprite = note.outlineColor[0];
                     //            note.markImg.sprite = note.objectColor[0];
                     //            note.innerImg.sprite = note.objectInnerColor[0];
@@ -323,11 +323,11 @@ public class SheetParser : MonoBehaviour
                     //        }
                     //        else if (_NoteBody == Enums_Game.NoteBody.RightHand)
                     //        {
-                    //            // ø‹∞¢ IN
+                    //            // Ïô∏Í∞Å IN
                     //            //note.img.sprite = note.objectColor[1];
                     //            //note.markImg.sprite = note.outlineColor[1];
 
-                    //            // ø‹∞¢ OUT
+                    //            // Ïô∏Í∞Å OUT
                     //            note.img.sprite = note.outlineColor[1];
                     //            note.markImg.sprite = note.objectColor[1];
                     //            note.innerImg.sprite = note.objectInnerColor[1];
@@ -373,11 +373,11 @@ public class SheetParser : MonoBehaviour
 
                     //    if (_NoteBody == Enums_Game.NoteBody.LeftHand)
                     //    {
-                    //        // ø‹∞¢ IN
+                    //        // Ïô∏Í∞Å IN
                     //        //note.img.sprite = note.objectColor[0];
                     //        //note.markImg.sprite = note.outlineColor[0];
 
-                    //        // ø‹∞¢ OUT
+                    //        // Ïô∏Í∞Å OUT
                     //        longNote.img.sprite = longNote.outlineColor[0];
                     //        longNote.markImg.sprite = longNote.objectColor[0];
                     //        longNote.innerImg.sprite = longNote.objectInnerColor[0];
@@ -386,11 +386,11 @@ public class SheetParser : MonoBehaviour
                     //    }
                     //    else if (_NoteBody == Enums_Game.NoteBody.RightHand)
                     //    {
-                    //        // ø‹∞¢ IN
+                    //        // Ïô∏Í∞Å IN
                     //        //note.img.sprite = note.objectColor[1];
                     //        //note.markImg.sprite = note.outlineColor[1];
 
-                    //        // ø‹∞¢ OUT
+                    //        // Ïô∏Í∞Å OUT
                     //        longNote.img.sprite = longNote.outlineColor[1];
                     //        longNote.markImg.sprite = longNote.objectColor[1];
                     //        longNote.innerImg.sprite = longNote.objectInnerColor[1];
@@ -433,11 +433,11 @@ public class SheetParser : MonoBehaviour
 
                     //    if (_NoteBody == Enums_Game.NoteBody.LeftHand)
                     //    {
-                    //        // ø‹∞¢ IN
+                    //        // Ïô∏Í∞Å IN
                     //        //note.img.sprite = note.objectColor[0];
                     //        //note.markImg.sprite = note.outlineColor[0];
 
-                    //        // ø‹∞¢ OUT
+                    //        // Ïô∏Í∞Å OUT
                     //        pressNote.img.sprite = pressNote.outlineColor[0];
                     //        pressNote.markImg.sprite = pressNote.objectColor[0];
                     //        pressNote.innerImg.sprite = pressNote.objectInnerColor[0];
@@ -446,11 +446,11 @@ public class SheetParser : MonoBehaviour
                     //    }
                     //    else if (_NoteBody == Enums_Game.NoteBody.RightHand)
                     //    {
-                    //        // ø‹∞¢ IN
+                    //        // Ïô∏Í∞Å IN
                     //        //note.img.sprite = note.objectColor[1];
                     //        //note.markImg.sprite = note.outlineColor[1];
 
-                    //        // ø‹∞¢ OUT
+                    //        // Ïô∏Í∞Å OUT
                     //        pressNote.img.sprite = pressNote.outlineColor[1];
                     //        pressNote.markImg.sprite = pressNote.objectColor[1];
                     //        pressNote.innerImg.sprite = pressNote.objectInnerColor[1];

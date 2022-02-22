@@ -78,11 +78,11 @@ public class StopNote : MonoBehaviour
     {
         float timer = 0f;
 
-        // ÀÌµ¿ ½ÃÀÛ À§Ä¡ ¼³Á¤
+        // ì´ë™ ì‹œì‘ ìœ„ì¹˜ ì„¤ì •
         Vector2 position = startPos;
         tr.anchoredPosition = position;
 
-        // ½Ã°£¿¡ µû¸¥ À§Ä¡ ¼³Á¤
+        // ì‹œê°„ì— ë”°ë¥¸ ìœ„ì¹˜ ì„¤ì •
         while (timer < duration)
         {
             timer += Time.deltaTime;
@@ -95,7 +95,7 @@ public class StopNote : MonoBehaviour
             yield return null;
         }
 
-        // ÀÌµ¿ Á¾·á À§Ä¡ ¼³Á¤
+        // ì´ë™ ì¢…ë£Œ ìœ„ì¹˜ ì„¤ì •
         //position = targetPos;
         position = startPos;
         tr.anchoredPosition = position;

@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject obj = PooledManager.instance.GetPooledObject_ChatBox();
 
-            // null ºñ±³½Ã ¼Óµµ ¿ì¼ö
+            // null ë¹„êµì‹œ ì†ë„ ìš°ìˆ˜
             if (!object.ReferenceEquals(obj, null))
             {
                 chatCnt += 1;
@@ -362,7 +362,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject obj = PooledManager.instance.GetPooledObject_ChatBox();
 
-            // null ºñ±³½Ã ¼Óµµ ¿ì¼ö
+            // null ë¹„êµì‹œ ì†ë„ ìš°ìˆ˜
             if (!object.ReferenceEquals(obj, null))
             {
                 chatCnt += 1;
@@ -413,7 +413,7 @@ public class GameManager : MonoBehaviour
 
             case GameState.UI:
                 //previewPosi = previewImg.rectTransform.position;
-                // °¡ºñÁö ÄÃ·º¼Ç °­Á¦
+                // ê°€ë¹„ì§€ ì»¬ë ‰ì…˜ ê°•ì œ
                 System.GC.Collect();
 
                 blackWall.SetActive(true);
@@ -489,7 +489,7 @@ public class GameManager : MonoBehaviour
                             rankEffectObjs[0].SetActive(false);
                             rankEffectObjs[1].SetActive(true);
 
-                            likeGoalTexts[1].text = string.Format("´ÙÀ½ µî±Ş±îÁö {0} ÁÁ¾Æ¿ä!", goldLikeValue);
+                            likeGoalTexts[1].text = string.Format("ë‹¤ìŒ ë“±ê¸‰ê¹Œì§€ {0} ì¢‹ì•„ìš”!", goldLikeValue);
                             screenGoalTxt.color = ParseStringColor("#A4A4A4");
                             screenLikeTxt.color = ParseStringColor("#A4A4A4");
                             gaugeInImg.color = ParseStringColor("#A4A4A4");
@@ -499,7 +499,7 @@ public class GameManager : MonoBehaviour
                             badgeSlider.value = 0;
                             badgeSlider.maxValue = goldLikeValue - silverLikeValue;
 
-                            psMain.startColor = ParseStringColor("#C3C3C3"); // preview ÀÌÆåÆ® »ö º¯°æ
+                            psMain.startColor = ParseStringColor("#C3C3C3"); // preview ì´í™íŠ¸ ìƒ‰ ë³€ê²½
 
                             gameRank = 1;
                             b_New = false;
@@ -528,7 +528,7 @@ public class GameManager : MonoBehaviour
                             badgeAnim.SetBool("Silver", false);
                             badgeAnim.SetBool("Gold", true);
                             
-                            likeGoalTexts[2].text = string.Format("´ÙÀ½ µî±Ş±îÁö {0} ÁÁ¾Æ¿ä!", diaLikeValue);
+                            likeGoalTexts[2].text = string.Format("ë‹¤ìŒ ë“±ê¸‰ê¹Œì§€ {0} ì¢‹ì•„ìš”!", diaLikeValue);
                             screenGoalTxt.color = ParseStringColor("#FFC44E");
                             screenLikeTxt.color = ParseStringColor("#FFC44E");
                             gaugeInImg.color = ParseStringColor("#FFC44E");
@@ -565,7 +565,7 @@ public class GameManager : MonoBehaviour
                             badgeChangeEffect.SetActive(true);
                             badgeAnim.SetTrigger("Change");
                             
-                            likeGoalTexts[3].text = string.Format("´ÙÀ½ µî±Ş±îÁö {0} ÁÁ¾Æ¿ä!", rubyLikeValue);
+                            likeGoalTexts[3].text = string.Format("ë‹¤ìŒ ë“±ê¸‰ê¹Œì§€ {0} ì¢‹ì•„ìš”!", rubyLikeValue);
                             screenGoalTxt.color = ParseStringColor("#0FF3D7");
                             screenLikeTxt.color = ParseStringColor("#0FF3D7");
                             gaugeInImg.color = ParseStringColor("#0FF3D7");
@@ -621,7 +621,7 @@ public class GameManager : MonoBehaviour
 
                     string str = currentNumber.ToString("N0");
 
-                    screenLikeTxt.text = string.Format("¢¾{0}", str);
+                    screenLikeTxt.text = string.Format("â™¥{0}", str);
                     likeTxt.text = str;
                 }
 
@@ -1062,9 +1062,9 @@ public class GameManager : MonoBehaviour
     //}
 
     /// <summary>
-    /// #°ª »öÀ» Color·Î º¯È¯
+    /// #ê°’ ìƒ‰ì„ Colorë¡œ ë³€í™˜
     /// </summary>
-    /// <param name="str">string Color°ª</param>
+    /// <param name="str">string Colorê°’</param>
     public Color ParseStringColor(string str)
     {
         ColorUtility.TryParseHtmlString(str, out Color color);
@@ -1120,9 +1120,9 @@ public class GameManager : MonoBehaviour
         songSlider.maxValue = music.clip.length;
         badgeSlider.maxValue = silverLikeValue;
 
-        likeGoalTexts[0].text = string.Format("´ÙÀ½ µî±Ş±îÁö {0} ÁÁ¾Æ¿ä!", silverLikeValue);
+        likeGoalTexts[0].text = string.Format("ë‹¤ìŒ ë“±ê¸‰ê¹Œì§€ {0} ì¢‹ì•„ìš”!", silverLikeValue);
         screenGoalTxt.text = goalStr[0];
-        //screenContentText.text = string.Format("'{0}'µî±Ş¿¡ µµ´ŞÇÏ¸é ¹«·á·Î 1°îÀ» ÇÃ·¹ÀÌ ÇÒ ¼ö ÀÖ¾î¿ä", goalStr[DataManager.instance.gameData._Goal]);
+        //screenContentText.text = string.Format("'{0}'ë“±ê¸‰ì— ë„ë‹¬í•˜ë©´ ë¬´ë£Œë¡œ 1ê³¡ì„ í”Œë ˆì´ í•  ìˆ˜ ìˆì–´ìš”", goalStr[DataManager.instance.gameData._Goal]);
 
         kioskCDImg.sprite = Resources.Load<Sprite>(string.Format("Song/{0}/{1}_Left", audioFileName, audioFileName));
         songNameTxt.text = DataManager.instance.songData._SongName;

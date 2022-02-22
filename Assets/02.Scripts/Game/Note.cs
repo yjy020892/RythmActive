@@ -145,7 +145,7 @@ public class Note : MonoBehaviour
         {
             numberTxt.text = GameManager.instance.noteCnt.ToString();
 
-            // �ִϸ��̼�
+            // 애니매이션
             //if (gameObject.CompareTag("HandLeft"))
             //{
             //    GameObject obj = PooledManager.instance.GetPooledObject_NoteEffect(tr, "SingleRedBornEffect");
@@ -209,7 +209,7 @@ public class Note : MonoBehaviour
 
                             obj.SetActive(true);
 
-                            // �ִϸ��̼�
+                            // 애니메이션
                             //markRT.sizeDelta = singleBrokenSize;
                             //singleAnim.SetBool("Hit", true);
                             outerImg.color = Color.clear;
@@ -262,7 +262,7 @@ public class Note : MonoBehaviour
                             obj.SetActive(true);
 
                             markRT.sizeDelta = singleBrokenSize;
-                            // �ִϸ��̼�
+                            // 애니메이션
                             //singleAnim.SetBool("Hit", true);
                             outerImg.color = Color.clear;
                             b_Fade = false;
@@ -658,7 +658,7 @@ public class Note : MonoBehaviour
         {
             if(noteType.Equals(NoteType.Single))
             {
-                // �ִϸ��̼�
+                // 애니메이션
                 //img.color = Color.clear;
 
                 //if (singleAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f)
@@ -728,7 +728,7 @@ public class Note : MonoBehaviour
             SoundManager.instance.PlayBPM();
             b_Fade = false;
             markRT.sizeDelta = singleBrokenSize;
-            // �ִϸ��̼�
+            // 애니메이션
             //singleAnim.SetBool("Hit", true);
 
             Destroy(gameObject);

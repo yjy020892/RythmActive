@@ -28,10 +28,10 @@ public class Sync : MonoBehaviour
     float frequency = 0f;
     float nextSample = 0f;
 
-    public float offset; // À½¾ÇÀÇ ½ÃÀÛÁ¡(ÃÊ)
-    public float offsetForSample; // À½¾ÇÀÇ ½ÃÀÛÁ¡(»ùÇÃ)
+    public float offset; // ìŒì•…ì˜ ì‹œì‘ì (ì´ˆ)
+    public float offsetForSample; // ìŒì•…ì˜ ì‹œì‘ì (ìƒ˜í”Œ)
 
-    public float scrollSpeed; //°î bpm¿¡ µû¸¥ ±âº» ¹è¼Ó
+    public float scrollSpeed; //ê³¡ bpmì— ë”°ë¥¸ ê¸°ë³¸ ë°°ì†
     public float userSpeedRate;
 
     private void Start()
@@ -54,33 +54,33 @@ public class Sync : MonoBehaviour
 
         //musicBPM = sheet.Bpm;
         //musicBPM = DataManager.instance.songData._BPM;
-        // ÇöÀç°îÀÇ ÁÖÆÄ¼ö°ª
+        // í˜„ì¬ê³¡ì˜ ì£¼íŒŒìˆ˜ê°’
         //frequency = music.clip.frequency;
-        // ½ÃÀÛÁ¡
+        // ì‹œì‘ì 
         //offset = sheet.Offset;
         offset = 1.6426f;
-        // ½ÃÀÛÁ¡ ÃÊ¸¦ »ùÇÃ·Î º¯È¯
+        // ì‹œì‘ì  ì´ˆë¥¼ ìƒ˜í”Œë¡œ ë³€í™˜
         offsetForSample = frequency * offset;
-        // ÇÑ¹ÚÀÚ ½Ã°£°ª
+        // í•œë°•ì ì‹œê°„ê°’
         oneBeatTime = (stdBPM / musicBPM);// * (musicBeat / stdBeat);
-        // Ã¹¹ÚÀÚ »ùÇÃ°ª(¿ÀÇÁ¼Â)
+        // ì²«ë°•ì ìƒ˜í”Œê°’(ì˜¤í”„ì…‹)
         nextSample += offsetForSample;
-        // 32ºñÆ®±âÁØ 1ºñÆ®ÀÇ ½Ã°£°ª
+        // 32ë¹„íŠ¸ê¸°ì¤€ 1ë¹„íŠ¸ì˜ ì‹œê°„ê°’
         //bitPerSec = stdBPM / (8 * musicBPM);
-        // 32ºñÆ®±âÁØ 1ºñÆ®ÀÇ »ùÇÃ°ª
+        // 32ë¹„íŠ¸ê¸°ì¤€ 1ë¹„íŠ¸ì˜ ìƒ˜í”Œê°’
         //bitPerSample = bitPerSec * playMusic.clip.frequency;
-        // 1¹Ù ½Ã°£°ª
+        // 1ë°” ì‹œê°„ê°’
         barPerSec = oneBeatTime * 4.0f;
-        // 1¹Ù »ùÇÃ°ª
+        // 1ë°” ìƒ˜í”Œê°’
         //barPerSample = barPesrSec * playMusic.clip.frequency; 
     }
 
     IEnumerator PlayTik()
     {
-        // ÃÊ´ç 44100 »ùÇÃ°ª Áõ°¡ ÇÁ¸®Äö½Ã°ªÀÎ 44100³ª´©¸é Á¤È®È÷ ³ª´²¶³¾îÁü
+        // ì´ˆë‹¹ 44100 ìƒ˜í”Œê°’ ì¦ê°€ í”„ë¦¬í€€ì‹œê°’ì¸ 44100ë‚˜ëˆ„ë©´ ì •í™•íˆ ë‚˜ëˆ ë–¨ì–´ì§
         if (music.timeSamples >= nextSample)
         {
-            playTik.PlayOneShot(tikClip); // »ç¿îµå Àç»ı
+            playTik.PlayOneShot(tikClip); // ì‚¬ìš´ë“œ ì¬ìƒ
             beatPerSample = oneBeatTime * frequency;
             nextSample += beatPerSample;
         }

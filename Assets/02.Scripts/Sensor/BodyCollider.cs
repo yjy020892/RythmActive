@@ -29,7 +29,7 @@ public class BodyCollider : MonoBehaviour
                     GameManager.instance.SpawnHeart();
 
                     note.b_Fade = false;
-                    // �ִϸ��̼�
+                    // 애니메이션
                     //note.singleAnim.SetBool("Hit", true);
                     note.markRT.sizeDelta = singleBrokenSize;
                     Destroy(col.gameObject);
@@ -84,7 +84,7 @@ public class BodyCollider : MonoBehaviour
                     GameManager.instance.SpawnHeart();
 
                     note.b_Fade = false;
-                    // �ִϸ��̼�
+                    // 애니메이션
                     //note.singleAnim.SetBool("Hit", true);
                     note.markRT.sizeDelta = singleBrokenSize;
                     Destroy(col.gameObject);

@@ -46,7 +46,7 @@ public class SceneController : MonoBehaviour
 
     private void Init(Action callback = null)
     {
-        //ÀÌº¥Æ® µî·Ï
+        //ì´ë²¤íŠ¸ ë“±ë¡
         SceneManager.activeSceneChanged += EventSceneChanged;
         SceneManager.sceneLoaded += EventSceneLoaded;
         SceneManager.sceneUnloaded += EventSceneUnloaded;
@@ -69,23 +69,23 @@ public class SceneController : MonoBehaviour
 
         //Debug.Log("[00] GotoScene [" + sceneNext + "]");
 
-        _preScene = _currentScene;  // ·Îµù
+        _preScene = _currentScene;  // ë¡œë”©
         _currentScene = (_preScene != SceneType.Loading) ? SceneType.Loading : sceneNext;
         _nextScene = sceneNext;
 
-        //ÆäÀÌµå ¾Æ¿ô ÀÌÆåÆ®(È­¸é°¡¸²)
+        //í˜ì´ë“œ ì•„ì›ƒ ì´í™íŠ¸(í™”ë©´ê°€ë¦¼)
         _screenEffect.ScreenFadeEffect(Color.black, false, 0.0f, 0.5f, 1.0f, result =>
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(_currentScene.ToString(), LoadSceneMode.Additive);
-            //¾À ·Îµù ¿Ï·áÈÄ È£ÃâµÊ
+            //ì”¬ ë¡œë”© ì™„ë£Œí›„ í˜¸ì¶œë¨
             StartCoroutine(WaitForSceneAsync(operation, () =>
             {
-                //Debug.Log("[00][LoadingScene]·Îµå ¿Ï·áµÊ");
+                //Debug.Log("[00][LoadingScene]ë¡œë“œ ì™„ë£Œë¨");
 
                 if (_preScene != SceneType.Base)
                 {
                     operation = SceneManager.UnloadSceneAsync(_preScene.ToString());
-                    //ÀÌÀü¾À ¾ğ·Îµå ¿Ï·áÈÄ È£ÃâµÊ
+                    //ì´ì „ì”¬ ì–¸ë¡œë“œ ì™„ë£Œí›„ í˜¸ì¶œë¨
                     StartCoroutine(WaitForSceneAsync(operation, () =>
                     {
                         _screenEffect.ScreenFadeEffectByLastSetting(true);
@@ -102,7 +102,7 @@ public class SceneController : MonoBehaviour
     }
 
     /// <summary>
-	/// ¾ÀÀ» ¾ğ·Îµå µÉ¶§±îÁö ´ë±âÈÄ Äİ¹é ½ÇÇàÇÔ
+	/// ì”¬ì„ ì–¸ë¡œë“œ ë ë•Œê¹Œì§€ ëŒ€ê¸°í›„ ì½œë°± ì‹¤í–‰í•¨
 	/// </summary>
 	private IEnumerator WaitForSceneAsync(AsyncOperation operation, Action callback = null)
     {
@@ -119,10 +119,10 @@ public class SceneController : MonoBehaviour
 
     #region Scene Callback Event
     /// <summary>
-    /// ¾À·Îµù ¿Ï·áÈÄ È£Ãâ
+    /// ì”¬ë¡œë”© ì™„ë£Œí›„ í˜¸ì¶œ
     /// </summary>
-    /// <param name="loadScene">·ÎµåµÈ ¾À</param>
-    /// <param name="mode">¾À¸ğµå Á¤º¸</param>
+    /// <param name="loadScene">ë¡œë“œëœ ì”¬</param>
+    /// <param name="mode">ì”¬ëª¨ë“œ ì •ë³´</param>
     private void EventSceneLoaded(Scene loadScene, LoadSceneMode mode)
     {
         SceneManager.SetActiveScene(loadScene);
@@ -138,7 +138,7 @@ public class SceneController : MonoBehaviour
     }
 
     /// <summary>
-    /// ¾À º¯°æÈÄ È£Ãâ
+    /// ì”¬ ë³€ê²½í›„ í˜¸ì¶œ
     /// </summary>
     /// <param name="before"></param>
     /// <param name="after"></param>
@@ -148,7 +148,7 @@ public class SceneController : MonoBehaviour
     }
 
     /// <summary>
-    /// ¾À ¾ğ·Îµå ¿Ï·áÈÄ È£Ãâ
+    /// ì”¬ ì–¸ë¡œë“œ ì™„ë£Œí›„ í˜¸ì¶œ
     /// </summary>
     /// <param name="unloadScene"></param>
     private void EventSceneUnloaded(Scene unloadScene)

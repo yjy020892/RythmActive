@@ -5,8 +5,8 @@ using UnityEngine;
 public interface iSceneChangeReceiver
 {
     /// <summary>
-    /// ¾ÀÀÌ ¹Ù²ïÈÄ Awake, OnEnable <  > Start »çÀÌ¿¡ È£ÃâµÊ
-    /// ÀÌº¥Æ® ¹ŞÀ» ¿ÀºêÁ§Æ®¿¡ "SceneChangeReceiver" Tag ÇÊ¿äÇÔ
+    /// ì”¬ì´ ë°”ë€í›„ Awake, OnEnable <  > Start ì‚¬ì´ì— í˜¸ì¶œë¨
+    /// ì´ë²¤íŠ¸ ë°›ì„ ì˜¤ë¸Œì íŠ¸ì— "SceneChangeReceiver" Tag í•„ìš”í•¨
     /// </summary>
     /// <param name="param">(Enums_Common.SceneType)param</param>
     void OnSceneChange(object param);

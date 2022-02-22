@@ -34,7 +34,7 @@ public class CSVReader : MonoBehaviour
     //            string value = values[j];
     //            value = value.TrimStart(TRIM_CHARS).TrimEnd(TRIM_CHARS).Replace("\\", "");
 
-    //            value = value.Replace("<br>", "\n"); // Ãß°¡µÈ ºÎºĞ. °³Çà¹®ÀÚ¸¦ \n´ë½Å <br>·Î »ç¿ëÇÑ´Ù.
+    //            value = value.Replace("<br>", "\n"); // ì¶”ê°€ëœ ë¶€ë¶„. ê°œí–‰ë¬¸ìë¥¼ \nëŒ€ì‹  <br>ë¡œ ì‚¬ìš©í•œë‹¤.
     //            value = value.Replace("<c>", ",");
 
     //            object finalvalue = value;

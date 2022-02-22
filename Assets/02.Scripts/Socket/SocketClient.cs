@@ -57,13 +57,14 @@ public class SocketClient : MonoBehaviour
 			//payPanel.SetActive(true);
 			//payResult.text = result;
 
+			payPanel.SetActive(true);
+			payResult.text = "ê²°ì œê°€ ì •ìƒì ìœ¼ë¡œ ì²˜ë¦¬ëìŠµë‹ˆë‹¤";
+
 			SoundManager.instance.PlayPayMoney();
 
 			b_Success = false;
 
-			//StartCoroutine(PayResultMethod("Success"));
-
-			IntroManager.instance.GotoScene();
+			StartCoroutine(PayResultMethod("Success"));
         }
 
         //if (Input.GetKeyDown(KeyCode.Space))
@@ -85,7 +86,10 @@ public class SocketClient : MonoBehaviour
 		}
         else if(str.Equals("Success"))
         {
+			payResult.text = string.Empty;
 			payPanel.SetActive(false);
+
+			IntroManager.instance.GotoScene();
 		}
 	}
 
@@ -96,7 +100,7 @@ public class SocketClient : MonoBehaviour
 	{
 		try
 		{
-			// ·ÎÄÃ IPv4ÁÖ¼Ò °¡Á®¿À±â
+			// ë¡œì»¬ IPv4ì£¼ì†Œ ê°€ì ¸ì˜¤ê¸°
 			IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
 			foreach(var ip in host.AddressList)
             {
@@ -147,8 +151,8 @@ public class SocketClient : MonoBehaviour
 						//int.TryParse(Encoding.ASCII.GetString(incommingData), out int data);
 						//string[] data = Encoding.ASCII.GetString(incommingData).Split(',');
 
-						//string[] data = string.Concat(Encoding.UTF8.GetString(incommingData).Where(x => !char.IsWhiteSpace(x))).Split(','); // ÇÑ±Û±úÁü
-						string[] data = string.Concat(euc.GetString(incommingData).Where(x => !char.IsWhiteSpace(x))).Split(','); // °ø¹éÁ¦°ÅÇØ¼­ ,·Î ³ª´©±â
+						//string[] data = string.Concat(Encoding.UTF8.GetString(incommingData).Where(x => !char.IsWhiteSpace(x))).Split(','); // í•œê¸€ê¹¨ì§
+						string[] data = string.Concat(euc.GetString(incommingData).Where(x => !char.IsWhiteSpace(x))).Split(','); // ê³µë°±ì œê±°í•´ì„œ ,ë¡œ ë‚˜ëˆ„ê¸°
 
 
 						ReceivePayData(data);
@@ -205,12 +209,12 @@ public class SocketClient : MonoBehaviour
 
 		if(ret.Equals(1))
         {
-			//Debug.Log("Á¤»ó °áÁ¦");
+			//Debug.Log("ì •ìƒ ê²°ì œ");
 			
 			//Debug.Log("null : " + num);
 			//Debug.Log("result : " + result);
 
-			if (!num.Equals("null") && result.Equals("Á¤»ó½ÂÀÎ"))
+			if (!num.Equals("null") && result.Equals("ì •ìƒìŠ¹ì¸"))
 			{
 				socketConnection.Dispose();
 				socketConnection.Close();
@@ -227,91 +231,91 @@ public class SocketClient : MonoBehaviour
 			switch (ret)
 			{
 				case -1:
-					Debug.Log("NVCAT ½ÇÇà ÁßÀÌ ¾Æ´Ô");
+					Debug.Log("NVCAT ì‹¤í–‰ ì¤‘ì´ ì•„ë‹˜");
 					break;
 
 				case -2:
-					Debug.Log("°Å·¡±İ¾×ÀÌ Á¸ÀçÇÏÁö ¾ÊÀ½");
+					Debug.Log("ê±°ë˜ê¸ˆì•¡ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŒ");
 					break;
 
 				case -3:
-					Debug.Log("È¯°æÁ¤º¸ ÀĞ±â ½ÇÆĞ");
+					Debug.Log("í™˜ê²½ì •ë³´ ì½ê¸° ì‹¤íŒ¨");
 					break;
 
 				case -4:
-					Debug.Log("NVCAT ¿¬µ¿ ¿À·ù ½ÇÆĞ (¸Á»ó Ãë¼Ò ÇÊ¿ä) VAN»ç¿¡ ¹®ÀÇ¿ä¸Á");
+					Debug.Log("NVCAT ì—°ë™ ì˜¤ë¥˜ ì‹¤íŒ¨ (ë§ìƒ ì·¨ì†Œ í•„ìš”) VANì‚¬ì— ë¬¸ì˜ìš”ë§");
 					break;
 
 				case -5:
-					Debug.Log("±âÅ¸ ÀÀ´äµ¥ÀÌÅÍ ¿À·ù (¸Á»ó Ãë¼Ò ÇÊ¿ä) VAN»ç¿¡ ¹®ÀÇ¿ä¸Á");
+					Debug.Log("ê¸°íƒ€ ì‘ë‹µë°ì´í„° ì˜¤ë¥˜ (ë§ìƒ ì·¨ì†Œ í•„ìš”) VANì‚¬ì— ë¬¸ì˜ìš”ë§");
 					break;
 
 				case -6:
-					Debug.Log("°áÁ¦ ½Ã°£ ÃÊ°ú");
+					Debug.Log("ê²°ì œ ì‹œê°„ ì´ˆê³¼");
 					break;
 
 				case -7:
-					Debug.Log("»ç¿ëÀÚ ¹× ¸®´õ±â ¿äÃ» Ãë¼Ò");
+					Debug.Log("ì‚¬ìš©ì ë° ë¦¬ë”ê¸° ìš”ì²­ ì·¨ì†Œ");
 					break;
 
 				case -8:
-					Debug.Log("FALLBACK °Å·¡ ¿äÃ» ÇÊ¿ä");
+					Debug.Log("FALLBACK ê±°ë˜ ìš”ì²­ í•„ìš”");
 					break;
 
 				case -9:
-					Debug.Log("±âÅ¸ ¿À·ù");
+					Debug.Log("ê¸°íƒ€ ì˜¤ë¥˜");
 					break;
 
 				case -10:
-					Debug.Log("IC ¿ì¼± °Å·¡ ¿äÃ» ÇÊ¿ä (ICÄ«µå MS¸®µù½Ã)");
+					Debug.Log("IC ìš°ì„  ê±°ë˜ ìš”ì²­ í•„ìš” (ICì¹´ë“œ MSë¦¬ë”©ì‹œ)");
 					break;
 
 				case -11:
-					Debug.Log("FALLBACK °Å·¡ ¾Æ´Ô");
+					Debug.Log("FALLBACK ê±°ë˜ ì•„ë‹˜");
 					break;
 
 				case -12:
-					Debug.Log("°Å·¡ ºÒ°¡ Ä«µå");
+					Debug.Log("ê±°ë˜ ë¶ˆê°€ ì¹´ë“œ");
 					break;
 
 				case -13:
-					Debug.Log("¼­¸í ¿äÃ» ¿À·ù");
+					Debug.Log("ì„œëª… ìš”ì²­ ì˜¤ë¥˜");
 					break;
 
 				case -14:
-					Debug.Log("¿äÃ» Àü¹® µ¥ÀÌÅÍ Æ÷¸ä ¿À·ù");
+					Debug.Log("ìš”ì²­ ì „ë¬¸ ë°ì´í„° í¬ë©§ ì˜¤ë¥˜");
 					break;
 
 				case -15:
-					Debug.Log("Ä«µå¸®´õ PORT OPEN ¿À·ù");
+					Debug.Log("ì¹´ë“œë¦¬ë” PORT OPEN ì˜¤ë¥˜");
 					break;
 
 				case -16:
-					Debug.Log("Á÷Àü°Å·¡ ¸Á»óÃë¼Ò ºÒ°¡ (Àü¹®°ü¸®¹øÈ£ ¾øÀ½)");
+					Debug.Log("ì§ì „ê±°ë˜ ë§ìƒì·¨ì†Œ ë¶ˆê°€ (ì „ë¬¸ê´€ë¦¬ë²ˆí˜¸ ì—†ìŒ)");
 					break;
 
 				case -17:
-					Debug.Log("Áßº¹ ¿äÃ» ºÒ°¡");
+					Debug.Log("ì¤‘ë³µ ìš”ì²­ ë¶ˆê°€");
 					break;
 
 				case -18:
-					Debug.Log("Áö¿øµÇÁö ¾Ê´Â Ä«µå");
+					Debug.Log("ì§€ì›ë˜ì§€ ì•ŠëŠ” ì¹´ë“œ");
 					break;
 
 				case -19:
-					Debug.Log("Çö±İICÄ«µå º¹¼ö°èÁÂ ¹ÌÁö¿ø");
+					Debug.Log("í˜„ê¸ˆICì¹´ë“œ ë³µìˆ˜ê³„ì¢Œ ë¯¸ì§€ì›");
 					break;
 
 				case -20:
-					Debug.Log("TIT Ä«µå¸®´õ±â ¿À·ù");
+					Debug.Log("TIT ì¹´ë“œë¦¬ë”ê¸° ì˜¤ë¥˜");
 					break;
 
 				case -21:
-					Debug.Log("NVCAT ³»ºÎ ¸Á»óÃë¼Ò ½ÇÆĞ (ÇØ´ç Ä«µå Ä«µå»ç È®ÀÎ ¿ä¸Á)");
+					Debug.Log("NVCAT ë‚´ë¶€ ë§ìƒì·¨ì†Œ ì‹¤íŒ¨ (í•´ë‹¹ ì¹´ë“œ ì¹´ë“œì‚¬ í™•ì¸ ìš”ë§)");
 					break;
 
 				case -22:
-					Debug.Log("Çö±İ IC Ä«µå (´ÙÀÌ¼Ò)");
+					Debug.Log("í˜„ê¸ˆ IC ì¹´ë“œ (ë‹¤ì´ì†Œ)");
 					break;
 			}
 

@@ -16,16 +16,16 @@ public class ClientTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Å¬¶óÀÌ¾ğÆ®¿¡¼­ »ç¿ëÇÒ ¼ÒÄÏ ÁØºñ
+        //í´ë¼ì´ì–¸íŠ¸ì—ì„œ ì‚¬ìš©í•  ì†Œì¼“ ì¤€ë¹„
         this.clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-        //Å¬¶óÀÌ¾ğÆ®´Â ¹ÙÀÎµùÇÒ ÇÊ¿ä ¾øÀ½
+        //í´ë¼ì´ì–¸íŠ¸ëŠ” ë°”ì¸ë”©í•  í•„ìš” ì—†ìŒ
 
-        //Á¢¼ÓÇÒ ¼­¹öÀÇ Åë½ÅÁöÁ¡(¸ñÀûÁö)
+        //ì ‘ì†í•  ì„œë²„ì˜ í†µì‹ ì§€ì (ëª©ì ì§€)
         IPAddress serverIPAdress = IPAddress.Parse(this.serverIp);
         IPEndPoint serverEndPoint = new IPEndPoint(serverIPAdress, 50001);
 
-        //¼­¹ö·Î ¿¬°á ¿äÃ»
+        //ì„œë²„ë¡œ ì—°ê²° ìš”ì²­
         try
         {
             Debug.Log("Connecting to Server");
@@ -54,8 +54,8 @@ public class ClientTest : MonoBehaviour
         }
         byte[] sendData = SimplePacket.ToByteArray(packet);
         byte[] prefSize = new byte[1];
-        prefSize[0] = (byte)sendData.Length;    //¹öÆÛÀÇ °¡Àå ¾ÕºÎºĞ¿¡ ÀÌ ¹öÆÛÀÇ ±æÀÌ¿¡ ´ëÇÑ Á¤º¸°¡ ÀÖ´Âµ¥ ÀÌ°ÍÀ» 
-        clientSocket.Send(prefSize);    //¸ÕÀú º¸³½´Ù.
+        prefSize[0] = (byte)sendData.Length;    //ë²„í¼ì˜ ê°€ì¥ ì•ë¶€ë¶„ì— ì´ ë²„í¼ì˜ ê¸¸ì´ì— ëŒ€í•œ ì •ë³´ê°€ ìˆëŠ”ë° ì´ê²ƒì„ 
+        clientSocket.Send(prefSize);    //ë¨¼ì € ë³´ë‚¸ë‹¤.
         clientSocket.Send(sendData);
 
         Debug.Log("Send Packet from Client :" + packet.mouseX.ToString() + "/" + packet.mouseX.ToString());
@@ -65,7 +65,7 @@ public class ClientTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //¸¶¿ì½º ¿ŞÂÊ Å¬¸®ÇÒ ¶§¸¶´Ù ÆĞÅ¶ Å¬·¡½º¸¦ ÀÌ¿ëÇØ¼­ À§Ä¡Á¤º¸¸¦ ¼­¹ö¿¡ Àü¼Û.
+        //ë§ˆìš°ìŠ¤ ì™¼ìª½ í´ë¦¬í•  ë•Œë§ˆë‹¤ íŒ¨í‚· í´ë˜ìŠ¤ë¥¼ ì´ìš©í•´ì„œ ìœ„ì¹˜ì •ë³´ë¥¼ ì„œë²„ì— ì „ì†¡.
         if (Input.GetMouseButtonDown(0) == true)
         {
             SimplePacket newPacket = new SimplePacket();
@@ -76,39 +76,39 @@ public class ClientTest : MonoBehaviour
     }
 }
 
-[Serializable]  //ÇÏ³ª·Î Á÷·ÄÈ­ ¹­°Ú´Ù. ¶æ? ¹ÙÀÌÆ®È­ ÇÏ°Ú´Ù?
-public class SimplePacket      //¸ğ³ëºñÇìÀÌºñ¾î´Â ½Ì±ÛÅæÀ¸·Î ¸¸µé°Å¶ó¼­ ¿©±â¼­´Â »èÁ¦
+[Serializable]  //í•˜ë‚˜ë¡œ ì§ë ¬í™” ë¬¶ê² ë‹¤. ëœ»? ë°”ì´íŠ¸í™” í•˜ê² ë‹¤?
+public class SimplePacket      //ëª¨ë…¸ë¹„í—¤ì´ë¹„ì–´ëŠ” ì‹±ê¸€í†¤ìœ¼ë¡œ ë§Œë“¤ê±°ë¼ì„œ ì—¬ê¸°ì„œëŠ” ì‚­ì œ
 {
 
     public float mouseX = 0.0f;
     public float mouseY = 0.0f;
 
-    //½î´Â°Å
+    //ì˜ëŠ”ê±°
     public static byte[] ToByteArray(SimplePacket packet)
     {
-        //½ºÆ®¸²»ı¼º ÇÑ´Ù.  ¹°Èê·Áº¸³»±â
+        //ìŠ¤íŠ¸ë¦¼ìƒì„± í•œë‹¤.  ë¬¼í˜ë ¤ë³´ë‚´ê¸°
         MemoryStream stream = new MemoryStream();
 
-        //½ºÆ®¸²À¸·Î °Ç³Ê¿Â ÆĞÅ¶À» Æ÷¸ËÀ¸·Î ¹ÙÀÌ³Ê¸® ¹­¾îÁØ´Ù.
+        //ìŠ¤íŠ¸ë¦¼ìœ¼ë¡œ ê±´ë„ˆì˜¨ íŒ¨í‚·ì„ í¬ë§·ìœ¼ë¡œ ë°”ì´ë„ˆë¦¬ ë¬¶ì–´ì¤€ë‹¤.
         BinaryFormatter formatter = new BinaryFormatter();
 
-        formatter.Serialize(stream, packet.mouseX);       //½ºÆ®¸²¿¡ ´ã´Â´Ù. ½Ã¸®¾ó¶óÀÌÁî´Â ´ã´Â´Ù´Â ¶æÀÓ.
+        formatter.Serialize(stream, packet.mouseX);       //ìŠ¤íŠ¸ë¦¼ì— ë‹´ëŠ”ë‹¤. ì‹œë¦¬ì–¼ë¼ì´ì¦ˆëŠ” ë‹´ëŠ”ë‹¤ëŠ” ëœ»ì„.
         formatter.Serialize(stream, packet.mouseY);
 
         return stream.ToArray();
     }
 
-    //¹Ş´Â°Å
+    //ë°›ëŠ”ê±°
     public static SimplePacket FromByteArray(byte[] input)
     {
-        //½ºÆ®¸² »ı¼º
+        //ìŠ¤íŠ¸ë¦¼ ìƒì„±
         MemoryStream stream = new MemoryStream(input);
-        //½ºÆ®¸²À¸·Î µ¥ÀÌÅÍ ¹ŞÀ» ¶§ ¹ÙÀÌ³Ê¸® Æ÷¸ÅÅÍ ¸»°í ´Ù¸¥°Åµµ ÀÖ´ÂÁö Ã£¾Æº¸±â
-        //¹ÙÀÌ³Ê¸® Æ÷¸ÅÅÍ·Î ½ºÆ®¸²¿¡ ¶°³»·Á¿Â µ¥ÀÌÅÍ¸¦ °ÇÁ®³½´Ù.
+        //ìŠ¤íŠ¸ë¦¼ìœ¼ë¡œ ë°ì´í„° ë°›ì„ ë•Œ ë°”ì´ë„ˆë¦¬ í¬ë§¤í„° ë§ê³  ë‹¤ë¥¸ê±°ë„ ìˆëŠ”ì§€ ì°¾ì•„ë³´ê¸°
+        //ë°”ì´ë„ˆë¦¬ í¬ë§¤í„°ë¡œ ìŠ¤íŠ¸ë¦¼ì— ë– ë‚´ë ¤ì˜¨ ë°ì´í„°ë¥¼ ê±´ì ¸ë‚¸ë‹¤.
         BinaryFormatter formatter = new BinaryFormatter();
-        //ÆĞÅ¶À» »ı¼ºÇØ¼­      //ÆĞÅ¶ »ı¼º±â¿¡ ´ëÇØ ¾Ë¾Æº¸±â!
+        //íŒ¨í‚·ì„ ìƒì„±í•´ì„œ      //íŒ¨í‚· ìƒì„±ê¸°ì— ëŒ€í•´ ì•Œì•„ë³´ê¸°!
         SimplePacket packet = new SimplePacket();
-        //»ı¼ºÇÑ ÆĞÅ¶¿¡ µğÀÌÅÍ¸¦ µğ½Ã¸®¾ó ¶óÀÌÁîÇØ¼­ ´ã´Â´Ù.
+        //ìƒì„±í•œ íŒ¨í‚·ì— ë””ì´í„°ë¥¼ ë””ì‹œë¦¬ì–¼ ë¼ì´ì¦ˆí•´ì„œ ë‹´ëŠ”ë‹¤.
         packet.mouseX = (float)formatter.Deserialize(stream);
         packet.mouseY = (float)formatter.Deserialize(stream);
 

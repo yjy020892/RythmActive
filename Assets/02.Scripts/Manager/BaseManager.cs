@@ -48,9 +48,9 @@ public class BaseManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¸¶¿ì½º Æ÷Áö¼Ç°ª ¸®ÅÏ
+    /// ë§ˆìš°ìŠ¤ í¬ì§€ì…˜ê°’ ë¦¬í„´
     /// </summary>
-    /// <param name="cam">Ä«¸Ş¶ó</param>
+    /// <param name="cam">ì¹´ë©”ë¼</param>
     public Vector3 SetMousePosition(Camera cam)
     {
         mousePosition = Input.mousePosition;

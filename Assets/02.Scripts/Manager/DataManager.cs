@@ -7,7 +7,7 @@ using System.IO;
 using DATA;
 
 /// <summary>
-/// µ¥ÀÌÅÍ °ü¸® ¸Å´ÏÀú
+/// ë°ì´í„° ê´€ë¦¬ ë§¤ë‹ˆì €
 /// </summary>
 public class DataManager : MonoBehaviour
 {
@@ -52,7 +52,7 @@ public class DataManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// µ¥ÀÌÅÍ ºÒ·¯¿À±â
+	/// ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°
 	/// </summary>
 	public void LoadConfigureData()
     {

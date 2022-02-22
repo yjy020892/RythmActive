@@ -38,9 +38,9 @@ public class SongControlButton : Editor
 
         using (new EditorGUILayout.HorizontalScope())
         {
-            EditorGUILayout.HelpBox("³ë·¡½ÃÀÛ", MessageType.None);
-            EditorGUILayout.HelpBox("ÀÏ½ÃÁ¤Áö", MessageType.None);
-            EditorGUILayout.HelpBox("³ë·¡Á¤Áö", MessageType.None);
+            EditorGUILayout.HelpBox("ë…¸ë˜ì‹œì‘", MessageType.None);
+            EditorGUILayout.HelpBox("ì¼ì‹œì •ì§€", MessageType.None);
+            EditorGUILayout.HelpBox("ë…¸ë˜ì •ì§€", MessageType.None);
         }
 
         EditorGUILayout.Space();
@@ -66,9 +66,9 @@ public class SongControlButton : Editor
 
         using (new EditorGUILayout.HorizontalScope())
         {
-            EditorGUILayout.HelpBox("BPMÀû¿ë", MessageType.None);
-            EditorGUILayout.HelpBox("¹ÚÀÚ+", MessageType.None);
-            EditorGUILayout.HelpBox("¹ÚÀÚ-", MessageType.None);
+            EditorGUILayout.HelpBox("BPMì ìš©", MessageType.None);
+            EditorGUILayout.HelpBox("ë°•ì+", MessageType.None);
+            EditorGUILayout.HelpBox("ë°•ì-", MessageType.None);
         }
 
         EditorGUILayout.Space();
@@ -109,20 +109,20 @@ public class SongControlButton : Editor
 
         using (new EditorGUILayout.HorizontalScope())
         {
-            EditorGUILayout.HelpBox("MusicTimeÀû¿ë", MessageType.None);
-            EditorGUILayout.HelpBox("½Ã°£+", MessageType.None);
-            EditorGUILayout.HelpBox("½Ã°£-", MessageType.None);
+            EditorGUILayout.HelpBox("MusicTimeì ìš©", MessageType.None);
+            EditorGUILayout.HelpBox("ì‹œê°„+", MessageType.None);
+            EditorGUILayout.HelpBox("ì‹œê°„-", MessageType.None);
         }
 
         EditorGUILayout.Space();
 
         using (new EditorGUILayout.HorizontalScope())
         {
-            createrManager.b_Click = EditorGUILayout.ToggleLeft("Å¬¸¯", createrManager.b_Click, GUILayout.MaxWidth(60));
+            createrManager.b_Click = EditorGUILayout.ToggleLeft("í´ë¦­", createrManager.b_Click, GUILayout.MaxWidth(60));
 
-            createrManager.b_Dance = EditorGUILayout.ToggleLeft("´í½º", createrManager.b_Dance, GUILayout.MaxWidth(60));
+            createrManager.b_Dance = EditorGUILayout.ToggleLeft("ëŒ„ìŠ¤", createrManager.b_Dance, GUILayout.MaxWidth(60));
 
-            createrManager.b_Self = EditorGUILayout.ToggleLeft("¼¿ÇÁ", createrManager.b_Self, GUILayout.MaxWidth(80));
+            createrManager.b_Self = EditorGUILayout.ToggleLeft("ì…€í”„", createrManager.b_Self, GUILayout.MaxWidth(80));
         }
 
         EditorGUILayout.Space();
@@ -130,9 +130,9 @@ public class SongControlButton : Editor
         //posGroupEnabled = EditorGUILayout.BeginToggleGroup("Align position", posGroupEnabled);
         using (new EditorGUILayout.HorizontalScope())
         {
-            createrManager.b_LeftHand = EditorGUILayout.ToggleLeft("¿Ş¼Õ", createrManager.b_LeftHand, GUILayout.MaxWidth(60));
+            createrManager.b_LeftHand = EditorGUILayout.ToggleLeft("ì™¼ì†", createrManager.b_LeftHand, GUILayout.MaxWidth(60));
 
-            createrManager.b_RightHand = EditorGUILayout.ToggleLeft("¿À¸¥¼Õ", createrManager.b_RightHand, GUILayout.MaxWidth(80));
+            createrManager.b_RightHand = EditorGUILayout.ToggleLeft("ì˜¤ë¥¸ì†", createrManager.b_RightHand, GUILayout.MaxWidth(80));
 
             createrManager.b_XMirror = EditorGUILayout.ToggleLeft("X Mirror", createrManager.b_XMirror, GUILayout.MaxWidth(80));
 
@@ -161,9 +161,9 @@ public class SongControlButton : Editor
 
         using (new EditorGUILayout.HorizontalScope())
         {
-            EditorGUILayout.HelpBox("¸®½ºÆ®ÀúÀå", MessageType.None);
-            EditorGUILayout.HelpBox("¸®½ºÆ®ÃÊ±âÈ­", MessageType.None);
-            EditorGUILayout.HelpBox("¸®½ºÆ®»èÁ¦", MessageType.None);
+            EditorGUILayout.HelpBox("ë¦¬ìŠ¤íŠ¸ì €ì¥", MessageType.None);
+            EditorGUILayout.HelpBox("ë¦¬ìŠ¤íŠ¸ì´ˆê¸°í™”", MessageType.None);
+            EditorGUILayout.HelpBox("ë¦¬ìŠ¤íŠ¸ì‚­ì œ", MessageType.None);
         }
         //EditorGUILayout.EndToggleGroup();
     }

@@ -36,9 +36,9 @@ public class BackGroundVideo : MonoBehaviour
         "Mr.Chu",
         "Next Level",
         "SHAKE IT",
-        "±îÅ»·¹³ª",
-        "¸¶¹ý¼Ò³à",
-        "¿À´ÃºÎÅÍ ¿ì¸®´Â"
+        "ê¹Œíƒˆë ˆë‚˜",
+        "ë§ˆë²•ì†Œë…€",
+        "ì˜¤ëŠ˜ë¶€í„° ìš°ë¦¬ëŠ”"
         };
 
     private int topNum, middleNum, leftNum, rightNum = 0;

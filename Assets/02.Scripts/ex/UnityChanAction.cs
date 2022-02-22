@@ -43,7 +43,7 @@ public class UnityChanAction : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            //transform.rotation = Quaternion.LookRotation(move); // ¿Ã∞Õ
+            //transform.rotation = Quaternion.LookRotation(move); // Ïù¥Í≤É
 
             //transform.rotation = Quaternion.LookRotation(a * Vector3.forward + b * Vector3.right);
             //transform.Translate(Vector3.forward * speed * Time.deltaTime);

@@ -82,8 +82,8 @@ public class GameOverManager : MonoBehaviour
         songBPMScreenText.text = string.Format("BPM : {0}", bpm);
         goalKioskText.text = string.Format("{0}", goalStr[goalNumber]);
         goalScreenText.text = string.Format("{0}", goalStr[goalNumber]);
-        likeKioskText.text = string.Format("¢¾{0}", score);
-        likeScreenText.text = string.Format("¢¾{0}", score);
+        likeKioskText.text = string.Format("â™¥{0}", score);
+        likeScreenText.text = string.Format("â™¥{0}", score);
 
         if(goalStr[goalNumber].Equals("Diamond"))
         {
@@ -101,7 +101,7 @@ public class GameOverManager : MonoBehaviour
             badgeScreenAnim.SetBool(goalStr[goalNumber], true);
         }
 
-        //likeScreenText.text = string.Format("¢¾{0}°³¸¦ ¹Ş¾ÒÁö¸¸\n{1}µî±ŞÀ¸·Î ¿Ã¶ó°¡Áö ¸øÇß¾î¿ä", score, goalStr[DataManager.instance.gameData._Goal]);
+        //likeScreenText.text = string.Format("â™¥{0}ê°œë¥¼ ë°›ì•˜ì§€ë§Œ\n{1}ë“±ê¸‰ìœ¼ë¡œ ì˜¬ë¼ê°€ì§€ ëª»í–ˆì–´ìš”", score, goalStr[DataManager.instance.gameData._Goal]);
 
         if (DataManager.instance.songData._Difficult.Equals(SongDifficult.Easy))
         {
@@ -116,13 +116,13 @@ public class GameOverManager : MonoBehaviour
 
         if(DataManager.instance.resultState.Equals(ResultState.LifeEnd))
         {
-            kioskContentText.text = "°ÔÀÓÀÌ Á¾·áµÇ¾ú½À´Ï´Ù";
-            screenContentText.text = "°ÔÀÓÀÌ Á¾·áµÇ¾ú½À´Ï´Ù";
+            kioskContentText.text = "ê²Œì„ì´ ì¢…ë£Œë˜ì—ˆìŠµë‹ˆë‹¤";
+            screenContentText.text = "ê²Œì„ì´ ì¢…ë£Œë˜ì—ˆìŠµë‹ˆë‹¤";
         }
         else if(DataManager.instance.resultState.Equals(ResultState.ScoreEnd))
         {
-            kioskContentText.text = string.Format("'{0}'µî±ŞÀ¸·Î ¿Ã¶ó°¡Áö ¸øÇß¾î¿ä ´ÙÀ½¿¡ ´Ù½Ã µµÀüÇØÁÖ¼¼¿ä!", goalStr[DataManager.instance.gameData._Goal]);
-            screenContentText.text = string.Format("'{0}'µî±ŞÀ¸·Î ¿Ã¶ó°¡Áö ¸øÇß¾î¿ä ´ÙÀ½¿¡ ´Ù½Ã µµÀüÇØÁÖ¼¼¿ä!", goalStr[DataManager.instance.gameData._Goal]);
+            kioskContentText.text = string.Format("'{0}'ë“±ê¸‰ìœ¼ë¡œ ì˜¬ë¼ê°€ì§€ ëª»í–ˆì–´ìš” ë‹¤ìŒì— ë‹¤ì‹œ ë„ì „í•´ì£¼ì„¸ìš”!", goalStr[DataManager.instance.gameData._Goal]);
+            screenContentText.text = string.Format("'{0}'ë“±ê¸‰ìœ¼ë¡œ ì˜¬ë¼ê°€ì§€ ëª»í–ˆì–´ìš” ë‹¤ìŒì— ë‹¤ì‹œ ë„ì „í•´ì£¼ì„¸ìš”!", goalStr[DataManager.instance.gameData._Goal]);
         }
 
         badgeKioskImg.sprite = badgeSprites[goalNumber];

@@ -18,7 +18,7 @@ public class LoadingManager : MonoBehaviour, iSceneChangeReceiver
     }
 
     /// <summary>
-	/// SceneController¿¡¼­ È£ÃâµÊ(Awake, OnEnable °ú Start »çÀÌ¿¡ È£ÃâµÊ)
+	/// SceneControllerì—ì„œ í˜¸ì¶œë¨(Awake, OnEnable ê³¼ Start ì‚¬ì´ì— í˜¸ì¶œë¨)
 	/// </summary>
 	/// <param name="param">param[0] = Next SceneType</param>
 	public void OnSceneChange(object param)

@@ -390,9 +390,9 @@ public class SongSelectManager : MonoBehaviour
             badgeAnim.SetBool("Other", true);
         }
 
-        likeText.text = string.Format("¢¾{0}", DataManager.instance.songData._Score);
+        likeText.text = string.Format("â™¥{0}", DataManager.instance.songData._Score);
         goalText.text = string.Format("{0}", goalStr[goalNumber]);
-        contentText.text = string.Format("{0}°³ÀÇ ÁÁ¾Æ¿ä¸¦ ¹Ş¾Æ '{1}'µî±ŞÀ» ´Ş¼ºÇÏ¼Ì½À´Ï´Ù", DataManager.instance.songData._Score, goalStr[goalNumber]);
+        contentText.text = string.Format("{0}ê°œì˜ ì¢‹ì•„ìš”ë¥¼ ë°›ì•„ '{1}'ë“±ê¸‰ì„ ë‹¬ì„±í•˜ì…¨ìŠµë‹ˆë‹¤", DataManager.instance.songData._Score, goalStr[goalNumber]);
     }
 
     public void SetSong()

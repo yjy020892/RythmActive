@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 [RequireComponent(typeof(Camera))]
 [ExecuteInEditMode]
 public class MirrorFlipCamera : MonoBehaviour
