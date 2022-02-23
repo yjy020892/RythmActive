@@ -14,6 +14,13 @@ namespace Enums_Common
         Rank,
         GameOver
 	}
+
+    public enum ServerState
+    {
+        None,
+        Connect,
+        Disconnect
+    }
 }
 
 namespace Enums_Game

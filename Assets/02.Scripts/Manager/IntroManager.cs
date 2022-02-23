@@ -36,7 +36,7 @@ public class IntroManager : MonoBehaviour
     [SerializeField] private VideoPlayer screenVideoPlayer = null;
 
     float timer = 0.0f;
-    [HideInInspector] public bool b_Start = false;
+    [HideInInspector] public bool b_Start, b_Connect = false;
     bool b_Logo = false;
 
     //private void Awake()
@@ -62,11 +62,14 @@ public class IntroManager : MonoBehaviour
 
             if (!b_Start && b_Logo)
             {
-                b_Start = true;
+                if(b_Connect)
+                {
+                    b_Start = true;
 
-                socketClient.SendMessage();
-                //BaseManager.instance.gameMode = Enums_Game.GameMode.Single;
-                //SceneController.instance.GotoScene(SceneType.SongSelect);
+                    socketClient.SendMessage();
+                    //BaseManager.instance.gameMode = Enums_Game.GameMode.Single;
+                    //SceneController.instance.GotoScene(SceneType.SongSelect);
+                }
             }
         }
 

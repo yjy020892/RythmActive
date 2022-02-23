@@ -8,19 +8,23 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Net;
+using Enums_Common;
 
 public class SocketClient : MonoBehaviour
 {
 	[SerializeField] private GameObject payPanel;
 	[SerializeField] private Text payResult;
 
+    private const string paySuccess = "결제가 정상적으로 처리됐습니다";
+    private const string serverFailStr = "프로그램을 종료 후 결제서버를 확인해주세요";
+
+    private ServerState serverState = ServerState.None;
 	private int port;
 	private string address, result;
 	private TcpClient socketConnection;
 	private Thread clientReceiveThread;
 
-	bool b_Fail = false;
-	bool b_Success = false;
+	bool b_Fail, b_Success = false;
 
 	// Use this for initialization
 	void Start()
@@ -31,40 +35,58 @@ public class SocketClient : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyDown(KeyCode.S))
-		{
-			clientReceiveThread.Interrupt();
-			socketConnection.Dispose();
-			socketConnection.Close();
-
-			b_Success = true;
-
-			SoundManager.instance.PlayPayMoney();
-		}
-
-		if (b_Fail)
+        if(serverState.Equals(ServerState.Connect))
         {
-			payPanel.SetActive(true);
-			payResult.text = result;
+            if (!IntroManager.instance.b_Connect)
+            {
+                IntroManager.instance.b_Connect = true;
+            }
 
-			b_Fail = false;
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                clientReceiveThread.Interrupt();
+                socketConnection.Dispose();
+                socketConnection.Close();
 
-			StartCoroutine(PayResultMethod("Fail"));
-		}
-		
-		if(b_Success)
+                b_Success = true;
+
+                SoundManager.instance.PlayPayMoney();
+            }
+
+            if (b_Fail)
+            {
+                payPanel.SetActive(true);
+                payResult.text = result;
+
+                b_Fail = false;
+
+                StartCoroutine(PayResultMethod("Fail"));
+            }
+
+            if (b_Success)
+            {
+                //payPanel.SetActive(true);
+                //payResult.text = result;
+
+                payPanel.SetActive(true);
+                payResult.text = paySuccess;
+
+                SoundManager.instance.PlayPayMoney();
+
+                b_Success = false;
+
+                StartCoroutine(PayResultMethod("Success"));
+            }
+        }
+		else if(serverState.Equals(ServerState.Disconnect))
         {
-			//payPanel.SetActive(true);
-			//payResult.text = result;
+            payResult.text = serverFailStr;
+            payPanel.SetActive(true);
 
-			payPanel.SetActive(true);
-			payResult.text = "결제가 정상적으로 처리됐습니다";
-
-			SoundManager.instance.PlayPayMoney();
-
-			b_Success = false;
-
-			StartCoroutine(PayResultMethod("Success"));
+            if (IntroManager.instance.b_Connect)
+            {
+                IntroManager.instance.b_Connect = false;
+            }
         }
 
         //if (Input.GetKeyDown(KeyCode.Space))
@@ -121,7 +143,9 @@ public class SocketClient : MonoBehaviour
 		}
 		catch (Exception e)
 		{
-			Debug.Log("On client connect exception " + e);
+            serverState = ServerState.Disconnect;
+
+            Debug.Log("On client connect exception " + e);
 		}
 	}
 	/// <summary> 	
@@ -138,7 +162,9 @@ public class SocketClient : MonoBehaviour
 				// Get a stream object for reading 				
 				using (NetworkStream stream = socketConnection.GetStream())
 				{
-					int length;
+                    serverState = ServerState.Connect;
+
+                    int length;
 					// Read incomming stream into byte arrary. 					
 					while ((length = stream.Read(bytes, 0, bytes.Length)) != 0)
 					{
@@ -164,7 +190,9 @@ public class SocketClient : MonoBehaviour
 		}
 		catch (SocketException socketException)
 		{
-			Debug.Log("Socket exception: " + socketException);
+            serverState = ServerState.Disconnect;
+
+            Debug.Log("Socket exception: " + socketException);
 		}
 	}
 
@@ -197,7 +225,9 @@ public class SocketClient : MonoBehaviour
 		}
 		catch (SocketException socketException)
 		{
-			Debug.Log("Socket exception: " + socketException);
+            serverState = ServerState.Disconnect;
+
+            Debug.Log("Socket exception: " + socketException);
 		}
 	}
 
@@ -231,91 +261,113 @@ public class SocketClient : MonoBehaviour
 			switch (ret)
 			{
 				case -1:
-					Debug.Log("NVCAT 실행 중이 아님");
+                    payResult.text = "NVCAT 실행 중이 아님";
+                    Debug.Log("NVCAT 실행 중이 아님");
 					break;
 
 				case -2:
-					Debug.Log("거래금액이 존재하지 않음");
+                    payResult.text = "거래금액이 존재하지 않음";
+                    Debug.Log("거래금액이 존재하지 않음");
 					break;
 
 				case -3:
-					Debug.Log("환경정보 읽기 실패");
+                    payResult.text = "환경정보 읽기 실패";
+                    Debug.Log("환경정보 읽기 실패");
 					break;
 
 				case -4:
-					Debug.Log("NVCAT 연동 오류 실패 (망상 취소 필요) VAN사에 문의요망");
+                    payResult.text = "NVCAT 연동 오류 실패 (망상 취소 필요) VAN사에 문의요망";
+                    Debug.Log("NVCAT 연동 오류 실패 (망상 취소 필요) VAN사에 문의요망");
 					break;
 
 				case -5:
-					Debug.Log("기타 응답데이터 오류 (망상 취소 필요) VAN사에 문의요망");
+                    payResult.text = "기타 응답데이터 오류 (망상 취소 필요) VAN사에 문의요망";
+                    Debug.Log("기타 응답데이터 오류 (망상 취소 필요) VAN사에 문의요망");
 					break;
 
 				case -6:
-					Debug.Log("결제 시간 초과");
+                    payResult.text = "결제 시간 초과";
+                    Debug.Log("결제 시간 초과");
 					break;
 
 				case -7:
-					Debug.Log("사용자 및 리더기 요청 취소");
+                    payResult.text = "사용자 및 리더기 요청 취소";
+                    Debug.Log("사용자 및 리더기 요청 취소");
 					break;
 
 				case -8:
-					Debug.Log("FALLBACK 거래 요청 필요");
+                    payResult.text = "FALLBACK 거래 요청 필요";
+                    Debug.Log("FALLBACK 거래 요청 필요");
 					break;
 
 				case -9:
-					Debug.Log("기타 오류");
+                    payResult.text = "기타 오류";
+                    Debug.Log("기타 오류");
 					break;
 
 				case -10:
-					Debug.Log("IC 우선 거래 요청 필요 (IC카드 MS리딩시)");
+                    payResult.text = "IC 우선 거래 요청 필요 (IC카드 MS리딩시)";
+                    Debug.Log("IC 우선 거래 요청 필요 (IC카드 MS리딩시)");
 					break;
 
 				case -11:
-					Debug.Log("FALLBACK 거래 아님");
+                    payResult.text = "FALLBACK 거래 아님";
+                    Debug.Log("FALLBACK 거래 아님");
 					break;
 
 				case -12:
-					Debug.Log("거래 불가 카드");
+                    payResult.text = "거래 불가 카드";
+                    Debug.Log("거래 불가 카드");
 					break;
 
 				case -13:
-					Debug.Log("서명 요청 오류");
+                    payResult.text = "서명 요청 오류";
+                    Debug.Log("서명 요청 오류");
 					break;
 
 				case -14:
-					Debug.Log("요청 전문 데이터 포멧 오류");
+                    payResult.text = "요청 전문 데이터 포멧 오류";
+                    Debug.Log("요청 전문 데이터 포멧 오류");
 					break;
 
 				case -15:
-					Debug.Log("카드리더 PORT OPEN 오류");
+                    payResult.text = "카드리더 PORT OPEN 오류";
+                    Debug.Log("카드리더 PORT OPEN 오류");
 					break;
 
 				case -16:
-					Debug.Log("직전거래 망상취소 불가 (전문관리번호 없음)");
+                    payResult.text = "직전거래 망상취소 불가 (전문관리번호 없음)";
+                    Debug.Log("직전거래 망상취소 불가 (전문관리번호 없음)");
 					break;
 
 				case -17:
-					Debug.Log("중복 요청 불가");
+                    payResult.text = "중복 요청 불가";
+                    Debug.Log("중복 요청 불가");
 					break;
 
 				case -18:
-					Debug.Log("지원되지 않는 카드");
+                    payResult.text = "지원되지 않는 카드";
+                    Debug.Log("지원되지 않는 카드");
 					break;
 
 				case -19:
-					Debug.Log("현금IC카드 복수계좌 미지원");
+                    payResult.text = "현금IC카드 복수계좌 미지원";
+                    Debug.Log("현금IC카드 복수계좌 미지원");
 					break;
 
 				case -20:
-					Debug.Log("TIT 카드리더기 오류");
+                    payResult.text = "TIT 카드리더기 오류";
+                    Debug.Log("TIT 카드리더기 오류");
 					break;
 
 				case -21:
-					Debug.Log("NVCAT 내부 망상취소 실패 (해당 카드 카드사 확인 요망)");
+                    payResult.text = "NVCAT 내부 망상취소 실패 (해당 카드 카드사 확인 요망)";
+                    Debug.Log("NVCAT 내부 망상취소 실패 (해당 카드 카드사 확인 요망)");
 					break;
 
 				case -22:
-					Debug.Log("현금 IC 카드 (다이소)");
+                    payResult.text = "현금 IC 카드 (다이소)";
+                    Debug.Log("현금 IC 카드 (다이소)");
 					break;
 			}
 
