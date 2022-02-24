@@ -55,6 +55,7 @@ namespace DATA
     public struct Pay
     {
         public string _Port;
+        public int _Money;
     }
 
     public struct GameData

@@ -24,6 +24,7 @@ public class IntroManager : MonoBehaviour
         }
     }
 
+    [SerializeField] private Text mentTxt;
     [SerializeField] private Camera kioskCam;
 
     [SerializeField] GameObject logo;
@@ -49,6 +50,8 @@ public class IntroManager : MonoBehaviour
     {
         DataManager.instance.resultState = Enums_Game.ResultState.None;
         BaseManager.instance.gameCnt = 0;
+
+        mentTxt.text = string.Format("플레이를 원하실 경우\n{0} 결제시 최소 {1}곡을 플레이 할 수 있어요!", DataManager.instance.payData._Money.ToString("C"), DataManager.instance.gameData._Life);
 
         VideoPlayerInit();
     }

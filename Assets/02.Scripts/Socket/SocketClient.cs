@@ -44,9 +44,9 @@ public class SocketClient : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                clientReceiveThread.Interrupt();
-                socketConnection.Dispose();
-                socketConnection.Close();
+                //clientReceiveThread.Interrupt();
+                
+                //socketConnection.Dispose();
 
                 b_Success = true;
 
@@ -168,6 +168,13 @@ public class SocketClient : MonoBehaviour
 					// Read incomming stream into byte arrary. 					
 					while ((length = stream.Read(bytes, 0, bytes.Length)) != 0)
 					{
+                        if(b_Success)
+                        {
+                            stream.Close();
+                            socketConnection.GetStream().Close();
+                            socketConnection.Close();
+                        }
+
 						var incommingData = new byte[length];
 						Array.Copy(bytes, 0, incommingData, 0, length);
 						// Convert byte array to string message.
@@ -261,112 +268,112 @@ public class SocketClient : MonoBehaviour
 			switch (ret)
 			{
 				case -1:
-                    payResult.text = "NVCAT 실행 중이 아님";
+                    result = "NVCAT 실행 중이 아님";
                     Debug.Log("NVCAT 실행 중이 아님");
 					break;
 
 				case -2:
-                    payResult.text = "거래금액이 존재하지 않음";
+                    result = "거래금액이 존재하지 않음";
                     Debug.Log("거래금액이 존재하지 않음");
 					break;
 
 				case -3:
-                    payResult.text = "환경정보 읽기 실패";
+                    result = "환경정보 읽기 실패";
                     Debug.Log("환경정보 읽기 실패");
 					break;
 
 				case -4:
-                    payResult.text = "NVCAT 연동 오류 실패 (망상 취소 필요) VAN사에 문의요망";
+                    result = "NVCAT 연동 오류 실패 (망상 취소 필요) VAN사에 문의요망";
                     Debug.Log("NVCAT 연동 오류 실패 (망상 취소 필요) VAN사에 문의요망");
 					break;
 
 				case -5:
-                    payResult.text = "기타 응답데이터 오류 (망상 취소 필요) VAN사에 문의요망";
+                    result = "기타 응답데이터 오류 (망상 취소 필요) VAN사에 문의요망";
                     Debug.Log("기타 응답데이터 오류 (망상 취소 필요) VAN사에 문의요망");
 					break;
 
 				case -6:
-                    payResult.text = "결제 시간 초과";
+                    result = "결제 시간 초과";
                     Debug.Log("결제 시간 초과");
 					break;
 
 				case -7:
-                    payResult.text = "사용자 및 리더기 요청 취소";
+                    result = "사용자 및 리더기 요청 취소";
                     Debug.Log("사용자 및 리더기 요청 취소");
 					break;
 
 				case -8:
-                    payResult.text = "FALLBACK 거래 요청 필요";
+                    result = "FALLBACK 거래 요청 필요";
                     Debug.Log("FALLBACK 거래 요청 필요");
 					break;
 
 				case -9:
-                    payResult.text = "기타 오류";
+                    result = "기타 오류";
                     Debug.Log("기타 오류");
 					break;
 
 				case -10:
-                    payResult.text = "IC 우선 거래 요청 필요 (IC카드 MS리딩시)";
+                    result = "IC 우선 거래 요청 필요 (IC카드 MS리딩시)";
                     Debug.Log("IC 우선 거래 요청 필요 (IC카드 MS리딩시)");
 					break;
 
 				case -11:
-                    payResult.text = "FALLBACK 거래 아님";
+                    result = "FALLBACK 거래 아님";
                     Debug.Log("FALLBACK 거래 아님");
 					break;
 
 				case -12:
-                    payResult.text = "거래 불가 카드";
+                    result = "거래 불가 카드";
                     Debug.Log("거래 불가 카드");
 					break;
 
 				case -13:
-                    payResult.text = "서명 요청 오류";
+                    result = "서명 요청 오류";
                     Debug.Log("서명 요청 오류");
 					break;
 
 				case -14:
-                    payResult.text = "요청 전문 데이터 포멧 오류";
+                    result = "요청 전문 데이터 포멧 오류";
                     Debug.Log("요청 전문 데이터 포멧 오류");
 					break;
 
 				case -15:
-                    payResult.text = "카드리더 PORT OPEN 오류";
+                    result = "카드리더 PORT OPEN 오류";
                     Debug.Log("카드리더 PORT OPEN 오류");
 					break;
 
 				case -16:
-                    payResult.text = "직전거래 망상취소 불가 (전문관리번호 없음)";
+                    result = "직전거래 망상취소 불가 (전문관리번호 없음)";
                     Debug.Log("직전거래 망상취소 불가 (전문관리번호 없음)");
 					break;
 
 				case -17:
-                    payResult.text = "중복 요청 불가";
+                    result = "중복 요청 불가";
                     Debug.Log("중복 요청 불가");
 					break;
 
 				case -18:
-                    payResult.text = "지원되지 않는 카드";
+                    result = "지원되지 않는 카드";
                     Debug.Log("지원되지 않는 카드");
 					break;
 
 				case -19:
-                    payResult.text = "현금IC카드 복수계좌 미지원";
+                    result = "현금IC카드 복수계좌 미지원";
                     Debug.Log("현금IC카드 복수계좌 미지원");
 					break;
 
 				case -20:
-                    payResult.text = "TIT 카드리더기 오류";
+                    result = "TIT 카드리더기 오류";
                     Debug.Log("TIT 카드리더기 오류");
 					break;
 
 				case -21:
-                    payResult.text = "NVCAT 내부 망상취소 실패 (해당 카드 카드사 확인 요망)";
+                    result = "NVCAT 내부 망상취소 실패 (해당 카드 카드사 확인 요망)";
                     Debug.Log("NVCAT 내부 망상취소 실패 (해당 카드 카드사 확인 요망)");
 					break;
 
 				case -22:
-                    payResult.text = "현금 IC 카드 (다이소)";
+                    result = "현금 IC 카드 (다이소)";
                     Debug.Log("현금 IC 카드 (다이소)");
 					break;
 			}

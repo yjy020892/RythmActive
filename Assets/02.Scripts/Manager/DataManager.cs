@@ -97,14 +97,9 @@ public class DataManager : MonoBehaviour
 					continue;
 				}
 
-				if (line.Contains("MAXVALUE"))
+				if (line.Contains("MONEY"))
 				{
-					uiValue._MaxValue = float.Parse(line.Split('=')[1]);
-				}
-
-				if (line.Contains("SPEED"))
-				{
-					uiValue._Speed = float.Parse(line.Split('=')[1]);
+					payData._Money = int.Parse(line.Split('=')[1]);
 				}
 			}
 
