@@ -16,16 +16,18 @@ public class BaseManager : MonoBehaviour
         get { return _gameCnt; }
         set { _gameCnt = value; }
     }
-
-    [HideInInspector] public bool b_Tutorial = false;
     #endregion
 
+    [HideInInspector] public bool b_Tutorial = false;
+
+    #region Mouse Touch Effect
     public GameObject poolObj_TouchEffect;
     public GameObject group_TouchEffect;
     public int poolAmount_TouchEffect;
     [HideInInspector] public List<GameObject> poolObjs_TouchEffect = new List<GameObject>();
 
     [HideInInspector] public Vector3 mousePosition;
+    #endregion
 
     public static BaseManager instance
     {

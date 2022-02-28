@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float gameCircleVal = 1.0f;
 
     public Vector3 camPosi;
+    Vector3 offsetZ = Vector3.zero;
     [SerializeField] private Transform cameraMain, heartSpawn, heartKioskSpawn;
     [SerializeField] public Transform bigEffectSpawn;
     Transform center;
@@ -295,6 +296,7 @@ public class GameManager : MonoBehaviour
 
         audioFileName = DataManager.instance.songData._AudioFileName;
         camPosi = cameraMain.position;
+        
         psMain = previewPs.main;
 
         // nuitrack
@@ -428,7 +430,8 @@ public class GameManager : MonoBehaviour
                 //{
                 Vector3 vec = cameraMain.position;
 
-                vec.x = Mathf.Lerp(cameraMain.position.x, center.position.x, Time.deltaTime);
+                vec.x = Mathf.Lerp(cameraMain.position.x, center.position.x, 0.8f * Time.deltaTime);
+                vec.z = Mathf.Lerp(cameraMain.position.z, center.position.z + offsetZ.z, Time.deltaTime);
                 //vec.x = center.position.x;
 
                 cameraMain.position = vec;
@@ -934,6 +937,9 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(2.0f);
         center = GameObject.FindGameObjectWithTag("Center").transform;
+        offsetZ.z = cameraMain.position.z - center.position.z;
+        Debug.Log(offsetZ);
+
         blackImg.SetActive(false);
         screenScreen.enabled = false;
         StopScreenVideoPlayer();
