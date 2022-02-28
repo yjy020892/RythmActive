@@ -8,6 +8,7 @@ namespace Enums_Common
 		Intro,
 		Lobby,
         SongSelect,
+        Tutorial,
         Game_Single,
 		Game_Multi,
         Result,
@@ -30,6 +31,7 @@ namespace Enums_Game
 		None,
 		Scale,
         Slider,
+        Animation,
         Game
     }
 

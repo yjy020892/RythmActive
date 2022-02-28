@@ -8,7 +8,17 @@ public class BaseManager : MonoBehaviour
     public GameMode gameMode = GameMode.None;
 
     private static BaseManager _instance;
-    [HideInInspector] public int gameCnt = 0;
+
+    #region Property
+    private int _gameCnt = 0;
+    public int GameCnt
+    {
+        get { return _gameCnt; }
+        set { _gameCnt = value; }
+    }
+
+    [HideInInspector] public bool b_Tutorial = false;
+    #endregion
 
     public GameObject poolObj_TouchEffect;
     public GameObject group_TouchEffect;

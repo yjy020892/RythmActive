@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
 {
     public UIType uiType = UIType.None;
 
+    [SerializeField] private GameObject _targetObj, _currntObj;
     public Image barImg;
     public RectTransform button;
 
@@ -75,6 +76,9 @@ public class UIController : MonoBehaviour
                 //SliderValueChange(sliderValue);
                 SliderValueChange(barImg.fillAmount);
                 break;
+
+            case UIType.Animation:
+                break;
         }
     }
 
@@ -87,5 +91,18 @@ public class UIController : MonoBehaviour
 
         float buttonAngle = value * 360;
         button.localEulerAngles = new Vector3(0, 0, -buttonAngle);
+    }
+
+    void ControlAnimation()
+    {
+        if (_currntObj.name.Equals("tutorial_anim5"))
+        {
+            StartCoroutine(TutorialManager.instance.GotoScene(0.5f));
+        }
+        else
+        {
+            _targetObj.SetActive(true);
+            _currntObj.SetActive(false);
+        }
     }
 }

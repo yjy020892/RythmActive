@@ -44,8 +44,6 @@ public class SocketClient : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                //clientReceiveThread.Interrupt();
-                
                 //socketConnection.Dispose();
 
                 b_Success = true;
@@ -157,7 +155,7 @@ public class SocketClient : MonoBehaviour
 		{
 			socketConnection = new TcpClient(address, port);
 			Byte[] bytes = new Byte[1024];
-			while (true)
+			while (!b_Success)
 			{
 				// Get a stream object for reading 				
 				using (NetworkStream stream = socketConnection.GetStream())
@@ -168,13 +166,6 @@ public class SocketClient : MonoBehaviour
 					// Read incomming stream into byte arrary. 					
 					while ((length = stream.Read(bytes, 0, bytes.Length)) != 0)
 					{
-                        if(b_Success)
-                        {
-                            stream.Close();
-                            socketConnection.GetStream().Close();
-                            socketConnection.Close();
-                        }
-
 						var incommingData = new byte[length];
 						Array.Copy(bytes, 0, incommingData, 0, length);
 						// Convert byte array to string message.
@@ -253,8 +244,8 @@ public class SocketClient : MonoBehaviour
 
 			if (!num.Equals("null") && result.Equals("정상승인"))
 			{
-				socketConnection.Dispose();
-				socketConnection.Close();
+				//socketConnection.Dispose();
+				//socketConnection.Close();
 
 				b_Success = true;
 			}

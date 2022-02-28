@@ -49,7 +49,8 @@ public class IntroManager : MonoBehaviour
     private void Start()
     {
         DataManager.instance.resultState = Enums_Game.ResultState.None;
-        BaseManager.instance.gameCnt = 0;
+        BaseManager.instance.GameCnt = 0;
+        BaseManager.instance.b_Tutorial = false;
 
         mentTxt.text = string.Format("플레이를 원하실 경우\n{0} 결제시 최소 {1}곡을 플레이 할 수 있어요!", DataManager.instance.payData._Money.ToString("C"), DataManager.instance.gameData._Life);
 
@@ -72,6 +73,17 @@ public class IntroManager : MonoBehaviour
                     socketClient.SendMessage();
                     //BaseManager.instance.gameMode = Enums_Game.GameMode.Single;
                     //SceneController.instance.GotoScene(SceneType.SongSelect);
+                }
+                else
+                {
+                    if (Input.GetKeyDown(KeyCode.S))
+                    {
+                        //clientReceiveThread.Interrupt();
+
+                        //socketConnection.Dispose();
+                        SoundManager.instance.PlayPayMoney();
+                        GotoScene();
+                    }
                 }
             }
         }

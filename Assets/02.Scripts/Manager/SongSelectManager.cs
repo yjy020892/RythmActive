@@ -88,11 +88,11 @@ public class SongSelectManager : MonoBehaviour
 
     private void Awake()
     {
-        if (BaseManager.instance.gameCnt.Equals(0))
+        if (BaseManager.instance.GameCnt.Equals(0))
         {
             startUI[0].SetActive(true);
         }
-        else if (BaseManager.instance.gameCnt >= 1)
+        else if (BaseManager.instance.GameCnt >= 1)
         {
             b_First = false;
             startUI[1].SetActive(true);
@@ -433,9 +433,17 @@ public class SongSelectManager : MonoBehaviour
         DataManager.instance.songData._SongName = songNameStr;
         DataManager.instance.songData._Artist = songArtistStr;
         int.TryParse(songBPM, out DataManager.instance.songData._BPM);
-        BaseManager.instance.gameCnt += 1;
+        BaseManager.instance.GameCnt += 1;
 
-        SceneController.instance.GotoScene(Enums_Common.SceneType.Game_Single);
+        if(!BaseManager.instance.b_Tutorial)
+        {
+            SceneController.instance.GotoScene(Enums_Common.SceneType.Tutorial);
+        }
+        else
+        {
+            SceneController.instance.GotoScene(Enums_Common.SceneType.Game_Single);
+        }
+        
         //SceneController.instance.GotoScene(Enums_Common.SceneType.Lobby);
     }
 
@@ -548,6 +556,7 @@ public class SongSelectManager : MonoBehaviour
         DataManager.instance.songData._Difficult = songDifficult;
     }
 
+    #region Video
     void VideoPlayerInit()
     {
         if (kioskScreen != null && screenScreen != null && kioskVideoPlayer != null && screenVideoPlayer != null)
@@ -626,4 +635,5 @@ public class SongSelectManager : MonoBehaviour
             screenVideoPlayer.Stop();
         }
     }
+    #endregion
 }

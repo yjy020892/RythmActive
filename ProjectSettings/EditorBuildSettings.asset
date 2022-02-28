@@ -21,18 +21,21 @@ EditorBuildSettings:
     path: Assets/01.Scenes/SongSelect.unity
     guid: 4258bc32abf2bbb4aa0c51fbf4f740db
   - enabled: 1
+    path: Assets/01.Scenes/Tutorial.unity
+    guid: 175520546aab05d449f7252bd7925373
+  - enabled: 1
     path: Assets/01.Scenes/Game_Single.unity
     guid: ae760f676c3c5d14f9ce7cb22a175474
   - enabled: 1
     path: Assets/01.Scenes/GameOver.unity
     guid: 62e52b24ae19bc14aaea21a4b0c6c0c7
   - enabled: 0
-    path: Assets/01.Scenes/CreateNote.unity
+    path: Assets/01.Scenes/EX/CreateNote.unity
     guid: c3ab414feb0600f4da3710b6c168661c
   - enabled: 0
-    path: Assets/01.Scenes/VideoTest.unity
+    path: Assets/01.Scenes/EX/VideoTest.unity
     guid: f492bc506453d19439646808c7f1cdc6
   - enabled: 0
-    path: Assets/01.Scenes/ScreenShot.unity
+    path: Assets/01.Scenes/EX/ScreenShot.unity
     guid: e7a1a17be491aac4e969db1d5bf0bfc5
   m_configObjects: {}

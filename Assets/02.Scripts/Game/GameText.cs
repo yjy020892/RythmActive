@@ -70,12 +70,12 @@ public class GameText : MonoBehaviour
 
             //SceneController.instance.GotoScene(Enums_Common.SceneType.Result);
 
-            if (BaseManager.instance.gameCnt.Equals(life))
+            if (BaseManager.instance.GameCnt.Equals(life))
             {
                 DataManager.instance.resultState = Enums_Game.ResultState.LifeEnd;
                 SceneController.instance.GotoScene(Enums_Common.SceneType.GameOver);
             }
-            else if(BaseManager.instance.gameCnt < life)
+            else if(BaseManager.instance.GameCnt < life)
             {
                 if(DataManager.instance.songData._Rank >= DataManager.instance.gameData._Goal)
                 {
