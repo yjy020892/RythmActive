@@ -85,6 +85,12 @@ public class SocketClient : MonoBehaviour
             {
                 IntroManager.instance.b_Connect = false;
             }
+
+            if (Input.GetKeyDown(KeyCode.PageUp))
+            {
+                SoundManager.instance.PlayPayMoney();
+                IntroManager.instance.GotoScene();
+            }
         }
 
         //if (Input.GetKeyDown(KeyCode.Space))

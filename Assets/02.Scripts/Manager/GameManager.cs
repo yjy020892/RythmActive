@@ -425,17 +425,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.Play:
-
-                //if (!b_Press)
-                //{
-                Vector3 vec = cameraMain.position;
-
-                vec.x = Mathf.Lerp(cameraMain.position.x, center.position.x, 0.8f * Time.deltaTime);
-                vec.z = Mathf.Lerp(cameraMain.position.z, center.position.z + offsetZ.z, Time.deltaTime);
-                //vec.x = center.position.x;
-
-                cameraMain.position = vec;
-                //}
+                MoveCamera();
 
                 musicTime = music.time * 1000;
 
@@ -1093,6 +1083,17 @@ public class GameManager : MonoBehaviour
             //cameraMain.position = Vector3.MoveTowards(cameraMain.position, camPosi, Time.deltaTime);
             cameraMain.position = camPosi;
         }
+    }
+
+    void MoveCamera()
+    {
+        Vector3 vec = cameraMain.position;
+
+        vec.x = Mathf.Lerp(cameraMain.position.x, center.position.x, 0.5f * Time.deltaTime);
+        vec.z = Mathf.Lerp(cameraMain.position.z, center.position.z + offsetZ.z, 0.3f * Time.deltaTime);
+        //vec.x = center.position.x;
+
+        cameraMain.position = vec;
     }
 
     #region Kiosk UI
