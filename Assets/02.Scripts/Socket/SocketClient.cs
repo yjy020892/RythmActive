@@ -241,14 +241,14 @@ public class SocketClient : MonoBehaviour
 		string num = data[1];
 		result = data[2];
 
-		if(ret.Equals(1))
+        if (ret.Equals(1))
         {
-			//Debug.Log("정상 결제");
-			
-			//Debug.Log("null : " + num);
-			//Debug.Log("result : " + result);
+            //Debug.Log("정상 결제");
 
-			if (!num.Equals("null") && result.Equals("정상승인"))
+            //Debug.Log("null : " + num);
+            //Debug.Log("result : " + result);
+
+            if (!num.Equals("null") && (result.Equals("정상승인") || result.Substring(0, 8).Equals("IC카드정상승인")))
 			{
 				//socketConnection.Dispose();
 				//socketConnection.Close();
@@ -300,7 +300,7 @@ public class SocketClient : MonoBehaviour
 					break;
 
 				case -8:
-                    result = "FALLBACK 거래 요청 필요";
+                    result = "카드 IC칩 오류";
                     Debug.Log("FALLBACK 거래 요청 필요");
 					break;
 
@@ -310,7 +310,7 @@ public class SocketClient : MonoBehaviour
 					break;
 
 				case -10:
-                    result = "IC 우선 거래 요청 필요 (IC카드 MS리딩시)";
+                    result = "카드를 리더기에 꽂아주세요";
                     Debug.Log("IC 우선 거래 요청 필요 (IC카드 MS리딩시)");
 					break;
 
@@ -373,7 +373,32 @@ public class SocketClient : MonoBehaviour
                     result = "현금 IC 카드 (다이소)";
                     Debug.Log("현금 IC 카드 (다이소)");
 					break;
-			}
+
+                case -23:
+                    result = "현금 IC MDB 존재하지 않음 (다이소)";
+                    Debug.Log("현금 IC MDB 존재하지 않음 (다이소)");
+                    break;
+
+                case -26:
+                    result = "리더기 응답데이터 수신 실패 (결제 재용청 필요)";
+                    Debug.Log("리더기 응답데이터 수신 실패 (결제 재용청 필요)");
+                    break;
+
+                case -27:
+                    result = "리더기 요청 실패 (결제 재요청 필요)";
+                    Debug.Log("리더기 요청 실패 (결제 재요청 필요)");
+                    break;
+
+                case -28:
+                    result = "서버 연결 실패 (결제 재요청 필요)";
+                    Debug.Log("서버 연결 실패 (결제 재요청 필요)");
+                    break;
+
+                case -29:
+                    result = "요청 전문 송신 실패 (결제 재요청 필요)";
+                    Debug.Log("요청 전문 송신 실패 (결제 재요청 필요)");
+                    break;
+            }
 
 			b_Fail = true;
 		}

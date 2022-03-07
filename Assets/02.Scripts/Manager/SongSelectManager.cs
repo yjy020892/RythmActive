@@ -67,9 +67,12 @@ public class SongSelectManager : MonoBehaviour
 
     [SerializeField] private Sprite[] badgeSprites;
 
-    [SerializeField] private Animator badgeAnim;
+    [SerializeField] private Animator badgeAnim, screenBackAnim;
     [SerializeField] private SpriteRenderer badgeImg;
     [SerializeField] private Text songNameScreenText, songArtistScreenText, songBPMScreenText, songLevelScreenText, goalText, likeText, contentText;
+
+    private float slidingTime = 1.5f;
+    private float desiredNumber, initialNumber, currentNumber = 0;
     #endregion
 
     static private SongSelectManager _instance;
@@ -176,6 +179,8 @@ public class SongSelectManager : MonoBehaviour
                 PlaySong();
             }
         }
+
+        SlidingNumber();
     }
 
     public void ClickArrow()
@@ -390,7 +395,8 @@ public class SongSelectManager : MonoBehaviour
             badgeAnim.SetBool("Other", true);
         }
 
-        likeText.text = string.Format("♥{0}", DataManager.instance.songData._Score);
+        //AddToNumber(DataManager.instance.songData._Score);
+        //likeText.text = string.Format("♥{0}", DataManager.instance.songData._Score);
         goalText.text = string.Format("{0}", goalStr[goalNumber]);
         contentText.text = string.Format("{0}개의 좋아요를 받아 '{1}'등급을 달성하셨습니다", DataManager.instance.songData._Score, goalStr[goalNumber]);
     }
@@ -554,6 +560,39 @@ public class SongSelectManager : MonoBehaviour
         }
 
         DataManager.instance.songData._Difficult = songDifficult;
+    }
+
+    public void AddToNumber(float value)
+    {
+        initialNumber = currentNumber;
+        desiredNumber += value;
+    }
+
+    void SlidingNumber()
+    {
+        if (currentNumber != desiredNumber)
+        {
+            if (initialNumber < desiredNumber)
+            {
+                currentNumber += (slidingTime * Time.deltaTime) * (desiredNumber - initialNumber);
+
+                if (currentNumber >= desiredNumber)
+                {
+                    currentNumber = desiredNumber;
+                }
+            }
+            else
+            {
+                currentNumber -= (slidingTime * Time.deltaTime) * (initialNumber - desiredNumber);
+
+                if (currentNumber <= desiredNumber)
+                {
+                    currentNumber = desiredNumber;
+                }
+            }
+
+            likeText.text = string.Format("♥{0}", currentNumber.ToString("N0"));
+        }
     }
 
     #region Video

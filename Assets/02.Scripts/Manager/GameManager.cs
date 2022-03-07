@@ -289,6 +289,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Init()
     {
+        for (int i = 0; i < firstGameObjs.Length; i++)
+        {
+            firstGameObjs[i].SetActive(true);
+        }
+
         songBPM = DataManager.instance.songData._BPM;
         songOffset = DataManager.instance.songData._Offset;
 
@@ -890,11 +895,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         blackCanvas.SetActive(false);
-        for(int i = 0; i < firstGameObjs.Length; i++)
-        {
-            firstGameObjs[i].SetActive(true);
-        }
-
+        
         yield return new WaitForSeconds(1.0f);
 
         gameState = GameState.Sensor;
@@ -928,7 +929,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         center = GameObject.FindGameObjectWithTag("Center").transform;
         offsetZ.z = cameraMain.position.z - center.position.z;
-        Debug.Log(offsetZ);
+        //Debug.Log(offsetZ);
 
         blackImg.SetActive(false);
         screenScreen.enabled = false;

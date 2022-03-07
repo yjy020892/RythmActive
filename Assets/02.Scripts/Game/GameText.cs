@@ -116,5 +116,20 @@ public class GameText : MonoBehaviour
                 completeUI.SetActive(true);
             }
         }
+        else if(gameObject.name.Equals("back"))
+        {
+            if(anim.GetBool("Title"))
+            {
+                anim.SetBool("Title", false);
+                anim.SetBool("Badge", true);
+            }
+            else if(anim.GetBool("Badge"))
+            {
+                anim.SetBool("Badge", false);
+                anim.SetBool("Content", true);
+
+                SongSelectManager.instance.AddToNumber(DataManager.instance.songData._Score);
+            }
+        }
     }
 }
