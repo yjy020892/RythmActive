@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Slider badgeSlider;
     [SerializeField] private Slider[] likeSliders;
 
-    [SerializeField] private Text songNameTxt, songArtistTxt, bpmTxt, likeTxt, screenLikeTxt, screenGoalTxt;
+    [SerializeField] private Text songNameTxt, songArtistTxt, bpmTxt, likeTxt, screenLikeTxt, screenGoalTxt, comboTxt;
     [SerializeField] private Text[] likeGoalTexts;
 
     private string[] goalStr = { "New", "Silver", "Gold", "Diamond", "Ruby" };
@@ -632,6 +632,11 @@ public class GameManager : MonoBehaviour
                 {
                     gameState = GameState.End;
                 }
+
+                if(comboCnt.Equals(0))
+                {
+                    comboTxt.text = string.Empty;
+                }
                 break;
 
             case GameState.End:
@@ -816,7 +821,7 @@ public class GameManager : MonoBehaviour
             {
                 if (leftNote != null)
                 {
-                    if (musicTime >= (leftNote.noteTime + 500) - 1200)
+                    if (musicTime >= (leftNote.noteTime + 200) - 2200)
                     {
                         noteCnt++;
                         sheet.leftHandList[0].SetActive(true);
@@ -849,7 +854,7 @@ public class GameManager : MonoBehaviour
             {
                 if (rightNote != null)
                 {
-                    if (musicTime >= (rightNote.noteTime + 500) - 1200)
+                    if (musicTime >= (rightNote.noteTime + 200) - 2200)
                     {
                         noteCnt++;
                         //Debug.Log(string.Format("[{0}] , [{1}]", music.time * 1000, sheet.leftHandList[0].GetComponent<Note>().noteTime - 1000));
@@ -978,13 +983,8 @@ public class GameManager : MonoBehaviour
 
     public void SetScore(Note note, Transform notePosi)
     {
-        float good = 0;
-        float perfect = 0;
-
         if (note.b_Good)
         {
-            good = 1;
-
             //if(!b_Fever)
             //{
             //    SetGage(-0.02f);
@@ -994,7 +994,6 @@ public class GameManager : MonoBehaviour
             //    good *= 1.5f;
             //}
 
-            AddToNumber(good);
             comboCnt += 1;
             goodCnt += 1;
             GameObject objt = PooledManager.instance.GetPooledObject_GameText(notePosi, "GOOD");
@@ -1002,8 +1001,6 @@ public class GameManager : MonoBehaviour
         }
         else if (note.b_Perfect)
         {
-            perfect = 1;
-
             //if(!b_Fever)
             //{
             //    SetGage(-0.04f);
@@ -1013,12 +1010,39 @@ public class GameManager : MonoBehaviour
             //    perfect *= 1.5f;
             //}
 
-            AddToNumber(perfect);
             comboCnt += 1;
             perfectCnt += 1;
             GameObject objt = PooledManager.instance.GetPooledObject_GameText(notePosi, "PERFECT");
             objt.SetActive(true);
         }
+
+        comboTxt.text = string.Format("{0}a", comboCnt);
+        AddToNumber(ComboCalculate(note, comboCnt));
+    }
+
+    float ComboCalculate(Note note, int combo)
+    {
+
+        int value = 0;
+
+        if (note.b_Good)
+        {
+            if(combo.Equals(1)) value = 1;
+            else if(combo.Equals(2)) value = 2;
+            else if (combo.Equals(3)) value = 3;
+            else if (combo.Equals(4)) value = 4;
+            else if (combo >= 5) value = 5;
+        }
+        else if(note.b_Perfect)
+        {
+            if (combo.Equals(1)) value = 2;
+            else if (combo.Equals(2)) value = 4;
+            else if (combo.Equals(3)) value = 6;
+            else if (combo.Equals(4)) value = 8;
+            else if (combo >= 5) value = 10;
+        }
+
+        return value;
     }
 
     //public void SetGage(float value)

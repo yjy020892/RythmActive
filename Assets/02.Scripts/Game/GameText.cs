@@ -130,6 +130,11 @@ public class GameText : MonoBehaviour
 
                 SongSelectManager.instance.AddToNumber(DataManager.instance.songData._Score);
             }
+            else if(anim.GetBool("Content"))
+            {
+                anim.SetBool("Content", false);
+                anim.SetBool("Bottom", true);
+            }
         }
     }
 }

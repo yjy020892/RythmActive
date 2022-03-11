@@ -11,11 +11,14 @@ public class AnimationControl : MonoBehaviour
     bool b_Dance = false;
     private void Start()
     {
-        audioSource = GameObject.Find("Sync").GetComponent<AudioSource>();
-
-        if (audioSource == null)
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Game_Single"))
         {
-            Debug.Log("audioSource null");
+            audioSource = GameObject.Find("Sync").GetComponent<AudioSource>();
+
+            if (audioSource == null)
+            {
+                Debug.Log("audioSource null");
+            }
         }
     }
 

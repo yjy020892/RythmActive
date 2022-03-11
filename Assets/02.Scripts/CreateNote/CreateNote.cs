@@ -17,10 +17,21 @@ public class CreateNote : MonoBehaviour
 
     public void PlayMusic()
     {
-        if (!audioSource.isPlaying)
+        if(this.enabled)
         {
-            Debug.Log("Play");
-            audioSource.Play();
+            if (!audioSource.isPlaying)
+            {
+                Debug.Log("Play");
+                audioSource.Play();
+            }
+        }
+    }
+
+    void Start()
+    {
+        if(!audioSource)
+        {
+            audioSource = FindObjectOfType<AudioSource>();
         }
     }
 

@@ -261,7 +261,7 @@ public class Note : MonoBehaviour
 
                             obj.SetActive(true);
 
-                            markRT.sizeDelta = singleBrokenSize;
+                            //markRT.sizeDelta = singleBrokenSize;
                             // 애니메이션
                             //singleAnim.SetBool("Hit", true);
                             outerImg.color = Color.clear;

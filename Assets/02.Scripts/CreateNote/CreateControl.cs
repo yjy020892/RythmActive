@@ -13,9 +13,19 @@ public class CreateControl : MonoBehaviour
     [SerializeField] private Transform cameraMain;
     Transform center;
 
+    TextAsset textAsset;
+    StringReader strReader;
+    string sheetText = string.Empty;
+    string[] textSplit;
+
     public List<string> noteList = new List<string>();
     [HideInInspector] public List<Vector2> fingerPositionLeft;
     [HideInInspector] public List<Vector2> fingerPositionRight;
+    public List<string> noteAutoLeftList = new List<string>();
+    public List<string> noteAutoRightList = new List<string>();
+
+    GameObject character;
+    public GameObject[] characterMid;
 
     public Animator anim;
     AnimatorStateInfo animationState;
@@ -46,6 +56,7 @@ public class CreateControl : MonoBehaviour
     public InputField rotationYInputField;
 
     public Dropdown songDropDown;
+    public Toggle autoNoteToggle;
 
     [Space()]
     public GameObject linePinkPrefab;
@@ -129,8 +140,6 @@ public class CreateControl : MonoBehaviour
         songDropDown.onValueChanged.AddListener((delegate {
             SongDropDown(songDropDown);
         }));
-
-        center = GameObject.FindGameObjectWithTag("Center").transform;
     }
 
     // Update is called once per frame
@@ -139,6 +148,7 @@ public class CreateControl : MonoBehaviour
         SetNote();
     }
 
+    Vector3 offsetZ = Vector3.zero;
     void SetNote()
     {
         if(Input.GetKeyDown(KeyCode.N))
@@ -169,7 +179,8 @@ public class CreateControl : MonoBehaviour
         {
             Vector3 vec = cameraMain.position;
 
-            vec.x = Mathf.Lerp(cameraMain.position.x, center.position.x, Time.deltaTime);
+            vec.x = Mathf.Lerp(cameraMain.position.x, center.position.x, 0.5f * Time.deltaTime);
+            vec.z = Mathf.Lerp(cameraMain.position.z, center.position.z + offsetZ.z, 0.3f * Time.deltaTime);
             //vec.x = center.position.x;
 
             cameraMain.position = vec;
@@ -192,15 +203,123 @@ public class CreateControl : MonoBehaviour
             //Debug.Log(string.Format("{0}:{1}", "animTime", animTime));
             animFrameText.text = string.Format("{0}:{1}", "AnimFrame", animFrameValue);
 
-            posiXValue = characterTR.position.x;
-            posiYValue = characterTR.position.y;
-            posiZValue = characterTR.position.z;
-            positionXText.text = string.Format("{0}:{1}", "PositionX", posiXValue);
-            positionYText.text = string.Format("{0}:{1}", "PositionY", posiYValue);
-            positionZText.text = string.Format("{0}:{1}", "PositionZ", posiZValue);
+            if(autoNoteToggle.isOn)
+            {
+                if(time >= int.Parse(noteAutoLeftList[0]))
+                {
+                    if (leftHand != null && rightHand != null)
+                    {
+                        string timeStr = noteAutoLeftList[0];
+                        noteAutoLeftList.Remove(noteAutoLeftList[0]);
 
-            rotYValue = characterTR.rotation.eulerAngles.y;
-            RotationYText.text = string.Format("{0}:{1}", "RotationY", rotYValue);
+                        //timeStr.Replace(",","");
+                        leftHandPosi = Camera.main.WorldToScreenPoint(leftHand.position);
+                        string leftStr = string.Empty;
+
+                        // --------------------------------------------------------------------------------------------------------------------------------------------------------------
+                        // ---------------------------------------------------------------------------- 왼손 ----------------------------------------------------------------------------
+                        // --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                        if (leftHandPosi.x <= 960.0f)
+                        {
+                            //Debug.Log(string.Format("x : {0}", -(960 - leftHandPosi.x)));
+                            leftHandPosi.x = -(960 - leftHandPosi.x);
+                        }
+                        else if (leftHandPosi.x > 960.0f)
+                        {
+                            //Debug.Log(string.Format("x : {0}", leftHandPosi.x - 960));
+                            leftHandPosi.x -= 960;
+                        }
+
+                        leftStr += leftHandPosi.x.ToString("0");
+                        leftStr += "#/";
+
+                        if (leftHandPosi.y <= 540.0f)
+                        {
+                            //Debug.Log(string.Format("y: {0}", -(540 - leftHandPosi.y)));
+                            leftHandPosi.y = -(540 - leftHandPosi.y);
+                        }
+                        else if (leftHandPosi.y > 540.0f)
+                        {
+                            //Debug.Log(string.Format("y: {0}", leftHandPosi.y - 540));
+                            leftHandPosi.y -= 540;
+                        }
+
+                        leftStr += leftHandPosi.y.ToString("0");
+                        leftStr += "#/";
+
+                        leftStr += timeStr;
+                        leftStr += string.Format("{0}{1}#/{2}#/{3}#/{4}#/{5}#/{6}", "#/1#/0#/0#/0#/x#/", timeSamplesValue, animFrameValue, posiXValue, posiYValue, posiZValue, rotYValue);
+
+                        noteList.Add(leftStr);
+
+                        ExcelDirectSave(noteList);
+                    }
+                }
+
+                if (time >= int.Parse(noteAutoRightList[0]))
+                {
+                    if (leftHand != null && rightHand != null)
+                    {
+                        string timeStr = noteAutoRightList[0];
+                        noteAutoRightList.Remove(noteAutoRightList[0]);
+
+                        //timeStr.Replace(",","");
+                        rightHandPosi = Camera.main.WorldToScreenPoint(rightHand.position);
+                        string rightStr = string.Empty;
+
+                        // --------------------------------------------------------------------------------------------------------------------------------------------------------------
+                        // --------------------------------------------------------------------------- 오른손 ---------------------------------------------------------------------------
+                        // --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                        if (rightHandPosi.x <= 960.0f)
+                        {
+                            //Debug.Log(string.Format("x : {0}", -(960 - leftHandPosi.x)));
+                            rightHandPosi.x = -(960 - rightHandPosi.x);
+                        }
+                        else if (rightHandPosi.x > 960.0f)
+                        {
+                            //Debug.Log(string.Format("x : {0}", leftHandPosi.x - 960));
+                            rightHandPosi.x -= 960;
+                        }
+
+                        rightStr += rightHandPosi.x.ToString("0");
+                        rightStr += "#/";
+
+                        if (rightHandPosi.y <= 540.0f)
+                        {
+                            //Debug.Log(string.Format("y: {0}", -(540 - leftHandPosi.y)));
+                            rightHandPosi.y = -(540 - rightHandPosi.y);
+                        }
+                        else if (rightHandPosi.y > 540.0f)
+                        {
+                            //Debug.Log(string.Format("y: {0}", leftHandPosi.y - 540));
+                            rightHandPosi.y -= 540;
+                        }
+
+                        rightStr += rightHandPosi.y.ToString("0");
+                        rightStr += "#/";
+
+                        rightStr += timeStr;
+                        rightStr += string.Format("{0}{1}#/{2}#/{3}#/{4}#/{5}#/{6}", "#/0#/1#/0#/0#/x#/", timeSamplesValue, animFrameValue, posiXValue, posiYValue, posiZValue, rotYValue);
+
+
+                        noteList.Add(rightStr);
+
+                        ExcelDirectSave(noteList);
+                    }
+                }
+            }
+            
+            //posiXValue = characterTR.position.x;
+            //posiYValue = characterTR.position.y;
+            //posiZValue = characterTR.position.z;
+            //positionXText.text = string.Format("{0}:{1}", "PositionX", posiXValue);
+            //positionYText.text = string.Format("{0}:{1}", "PositionY", posiYValue);
+            //positionZText.text = string.Format("{0}:{1}", "PositionZ", posiZValue);
+
+            //rotYValue = characterTR.rotation.eulerAngles.y;
+            //RotationYText.text = string.Format("{0}:{1}", "RotationY", rotYValue);
         }
 
         #region Single Note
@@ -1003,9 +1122,40 @@ public class CreateControl : MonoBehaviour
         switch(str)
         {
             case "StartButton":
-                if(string.IsNullOrEmpty(songName))
+                if (string.IsNullOrEmpty(songName))
                 {
                     songName = "BBoom BBoom";
+                }
+
+                if(autoNoteToggle.isOn)
+                {
+                    textAsset = Resources.Load(string.Format("Song/{0}/{1}_{2}_Data", songName, songName, "Hard")) as TextAsset;
+                    strReader = new StringReader(textAsset.text);
+
+                    ParseSheet();
+                }
+                
+                for (int i = 0; i < characterMid.Length; i++)
+                {
+                    if (characterMid[i].name.Equals(string.Format("{0}{1}", songName, "_Middle")))
+                    {
+                        character = Instantiate(characterMid[i]);
+                        character.SetActive(true);
+
+                        CreateNote cn = character.GetComponentInChildren<CreateNote>();
+
+                        character.GetComponentInChildren<AnimationControl>().enabled = false;
+                        cn.enabled = true;
+
+                        anim = character.GetComponentInChildren<Animator>();
+                        characterTR = character.transform;
+                        leftHand = cn.leftObj;
+                        rightHand = cn.rightObj;
+
+                        center = GameObject.FindGameObjectWithTag("Center").transform;
+                        offsetZ.z = cameraMain.position.z - center.position.z;
+                        break;
+                    }
                 }
 
                 Vector3 r;
@@ -1168,6 +1318,36 @@ public class CreateControl : MonoBehaviour
     #endregion
 
     #region File
+    public void ParseSheet()
+    {
+        int _NoteTime = 1;
+
+        while (sheetText != null)
+        {
+            sheetText = strReader.ReadLine();
+            textSplit = sheetText.Split('=');
+
+            if (sheetText == string.Format("[NoteInfo_{0}]", "Hard"))
+            {
+                while ((sheetText = strReader.ReadLine()) != null)
+                {
+                    textSplit = sheetText.Split('/');
+
+                    int.TryParse(textSplit[2], out _NoteTime);
+
+                    if (int.Parse(textSplit[3]).Equals(1))
+                    {
+                        noteAutoLeftList.Add(_NoteTime.ToString());
+                    }
+                    else if (int.Parse(textSplit[4]).Equals(1))
+                    {
+                        noteAutoRightList.Add(_NoteTime.ToString());
+                    }
+                }
+            }
+        }
+    }
+
     public void TxtSave()
     {
         //Debug.Log(string.Format("Path : {0}", Application.streamingAssetsPath));
