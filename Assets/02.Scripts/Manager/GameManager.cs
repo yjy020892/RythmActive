@@ -140,152 +140,27 @@ public class GameManager : MonoBehaviour
         }
         //deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if(!maps[0].activeInHierarchy)
-            {
-                for(int i = 0; i < maps.Length; i++)
-                {
-                    if(maps[i].activeInHierarchy)
-                    {
-                        maps[i].SetActive(false);
-
-                        break;
-                    }
-                }
-
-                maps[0].SetActive(true);
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (!maps[1].activeInHierarchy)
-            {
-                for (int i = 0; i < maps.Length; i++)
-                {
-                    if (maps[i].activeInHierarchy)
-                    {
-                        maps[i].SetActive(false);
-                        
-                        break;
-                    }
-                }
-
-                maps[1].SetActive(true);
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (!maps[2].activeInHierarchy)
-            {
-                for (int i = 0; i < maps.Length; i++)
-                {
-                    if (maps[i].activeInHierarchy)
-                    {
-                        maps[i].SetActive(false);
-
-                        break;
-                    }
-                }
-
-                maps[2].SetActive(true);
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            if (!maps[3].activeInHierarchy)
-            {
-                for (int i = 0; i < maps.Length; i++)
-                {
-                    if (maps[i].activeInHierarchy)
-                    {
-                        maps[i].SetActive(false);
-                        
-                        break;
-                    }
-                }
-
-                maps[3].SetActive(true);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            if (!maps[4].activeInHierarchy)
-            {
-                for (int i = 0; i < maps.Length; i++)
-                {
-                    if (maps[i].activeInHierarchy)
-                    {
-                        maps[i].SetActive(false);
-
-                        break;
-                    }
-                }
-
-                maps[4].SetActive(true);
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.End))
         {
             gameState = GameState.End;
         }
 
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            GameObject obj = PooledManager.instance.GetPooledObject_ChatBox();
+        //if(Input.GetKeyDown(KeyCode.O))
+        //{
+        //    GameObject obj = PooledManager.instance.GetPooledObject_ChatBox();
 
-            // null 비교시 속도 우수
-            if (!object.ReferenceEquals(obj, null))
-            {
-                chatCnt += 1;
-                obj.SetActive(true);
-            }
-            //chatScroll.verticalNormalizedPosition = 1;
+        //    // null 비교시 속도 우수
+        //    if (!object.ReferenceEquals(obj, null))
+        //    {
+        //        chatCnt += 1;
+        //        obj.SetActive(true);
+        //    }
+        //    //chatScroll.verticalNormalizedPosition = 1;
 
-        }
+        //}
 
         GameStateFunc();
-
-        //if(b_BlackWall)
-        //{
-        //    blackWall.color = new Color(0, 0, 0, blackWall.color.a + 0.2f * Time.deltaTime);
-
-        //    if(blackWall.color.a >= 0.65f)
-        //    {
-        //        b_BlackWall = false;
-        //    }
-        //}
     }
-
-    //private void FixedUpdate()
-    //{
-    //    if(gameState.Equals(GameState.Play))
-    //    {
-    //        musicTime = music.time * 1000;
-
-    //        if (!b_BPM)
-    //        {
-    //            if (musicTime >= songOffset)
-    //            {
-    //                checkMusicTime = music.time;
-    //                b_BPM = true;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            previewImg.transform.Translate(Vector2.up * Time.deltaTime);
-
-    //            if (music.time >= checkMusicTime + songSPB)
-    //            {
-    //                bpmCnt++;
-
-    //                //ScreenCapture.CaptureScreenshot(string.Format("{0}{1}{2}{3}.png", Application.dataPath, "/StreamingAssets/", "ScreenShot/", bpmCnt));
-    //                checkMusicTime += songSPB;
-    //            }
-    //        }
-    //    }
-    //}
 
     IEnumerator Init()
     {

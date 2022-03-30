@@ -27,9 +27,26 @@ public class GameOverManager : MonoBehaviour
     [SerializeField] private Text songNameKioskText, songArtistKioskText, songBPMKioskText, songLevelKioskText, goalKioskText, likeKioskText, kioskEndTimeText, kioskContentText;
     [SerializeField] private Text songNameScreenText, songArtistScreenText, songBPMScreenText, songLevelScreenText, goalScreenText, likeScreenText, screenEndTimeText, screenContentText;
 
+    private float slidingTime = 1.5f;
+    private float desiredNumber, initialNumber, currentNumber = 0;
+
     private float endTimer = 0.0f;
 
     bool b_Change = false;
+
+    static private GameOverManager _instance;
+
+    public static GameOverManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GameOverManager>();
+            }
+            return _instance;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +80,8 @@ public class GameOverManager : MonoBehaviour
                 SceneController.instance.GotoScene(Enums_Common.SceneType.Intro);
             }
         }
+
+        SlidingNumber();
     }
 
     private void Init()
@@ -82,23 +101,34 @@ public class GameOverManager : MonoBehaviour
         songBPMScreenText.text = string.Format("BPM : {0}", bpm);
         goalKioskText.text = string.Format("{0}", goalStr[goalNumber]);
         goalScreenText.text = string.Format("{0}", goalStr[goalNumber]);
-        likeKioskText.text = string.Format("♥{0}", score);
-        likeScreenText.text = string.Format("♥{0}", score);
+        //likeKioskText.text = string.Format("♥{0}", score);
+        //likeScreenText.text = string.Format("♥{0}", score);
 
-        if(goalStr[goalNumber].Equals("Diamond"))
+        //if(goalStr[goalNumber].Equals("Diamond"))
+        //{
+        //    badgeKioskAnim.SetBool("Gold", true);
+        //    badgeScreenAnim.SetBool("Gold", true);
+        //}
+        //else if(goalStr[goalNumber].Equals("New"))
+        //{
+        //    badgeKioskAnim.SetBool("Start", true);
+        //    badgeScreenAnim.SetBool("Start", true);
+        //}
+        //else
+        //{
+        //    badgeKioskAnim.SetBool(goalStr[goalNumber], true);
+        //    badgeScreenAnim.SetBool(goalStr[goalNumber], true);
+        //}
+
+        if (goalStr[goalNumber].Equals("Ruby"))
         {
-            badgeKioskAnim.SetBool("Gold", true);
-            badgeScreenAnim.SetBool("Gold", true);
-        }
-        else if(goalStr[goalNumber].Equals("New"))
-        {
-            badgeKioskAnim.SetBool("Start", true);
-            badgeScreenAnim.SetBool("Start", true);
+            badgeKioskAnim.SetBool("Ruby", true);
+            badgeScreenAnim.SetBool("Ruby", true);
         }
         else
         {
-            badgeKioskAnim.SetBool(goalStr[goalNumber], true);
-            badgeScreenAnim.SetBool(goalStr[goalNumber], true);
+            badgeKioskAnim.SetBool("Other", true);
+            badgeScreenAnim.SetBool("Other", true);
         }
 
         //likeScreenText.text = string.Format("♥{0}개를 받았지만\n{1}등급으로 올라가지 못했어요", score, goalStr[DataManager.instance.gameData._Goal]);
@@ -129,6 +159,41 @@ public class GameOverManager : MonoBehaviour
         badgeScreenImg.sprite = badgeSprites[goalNumber];
 
         endTimer = DataManager.instance.gameData._EndTime;
+    }
+
+    public void AddToNumber(float value)
+    {
+        initialNumber = currentNumber;
+        desiredNumber += value;
+    }
+
+    void SlidingNumber()
+    {
+        if (currentNumber != desiredNumber)
+        {
+            if (initialNumber < desiredNumber)
+            {
+                currentNumber += (slidingTime * Time.deltaTime) * (desiredNumber - initialNumber);
+
+                if (currentNumber >= desiredNumber)
+                {
+                    currentNumber = desiredNumber;
+                }
+            }
+            else
+            {
+                currentNumber -= (slidingTime * Time.deltaTime) * (initialNumber - desiredNumber);
+
+                if (currentNumber <= desiredNumber)
+                {
+                    currentNumber = desiredNumber;
+                }
+            }
+
+            //likeText.text = string.Format("♥{0}", currentNumber.ToString("N0"));
+            likeKioskText.text = string.Format("♥{0}", currentNumber.ToString("N0"));
+            likeScreenText.text = string.Format("♥{0}", currentNumber.ToString("N0"));
+        }
     }
 
     #region Video

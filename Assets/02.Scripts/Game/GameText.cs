@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameText : MonoBehaviour
@@ -128,7 +129,14 @@ public class GameText : MonoBehaviour
                 anim.SetBool("Badge", false);
                 anim.SetBool("Content", true);
 
-                SongSelectManager.instance.AddToNumber(DataManager.instance.songData._Score);
+                if(SceneManager.GetActiveScene().name.Equals("SongSelect"))
+                {
+                    SongSelectManager.instance.AddToNumber(DataManager.instance.songData._Score);
+                }
+                else if(SceneManager.GetActiveScene().name.Equals("GameOver"))
+                {
+                    GameOverManager.instance.AddToNumber(DataManager.instance.songData._Score * 0.5f);
+                }
             }
             else if(anim.GetBool("Content"))
             {
