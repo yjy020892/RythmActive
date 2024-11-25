@@ -1,5 +1,7 @@
 # RythmActive
 EOPROTEC FIRST PROJECT
+https://www.youtube.com/watch?v=y3TQwavdGak
+메가박스 상암 월드컵경기장 근처에 설치 (현재는 모름)
 
 # 개발관련
 ### 인원
