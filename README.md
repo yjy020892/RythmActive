@@ -1,6 +1,6 @@
 # RythmActive
-EOPROTEC FIRST PROJECT
-https://www.youtube.com/watch?v=y3TQwavdGak
+저스트 댄스를 벤치마킹해서 만든 리듬게임</br>
+https://www.youtube.com/watch?v=y3TQwavdGak</br>
 메가박스 상암 월드컵경기장 근처에 설치 (현재는 모름)
 
 # 개발관련
